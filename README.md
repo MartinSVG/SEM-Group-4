@@ -14,5 +14,4 @@ License [![LICENSE](https://img.shields.io/github/license/MartinSVG/SEM-Group-4.
 
 Releases [![Releases](https://img.shields.io/github/release/MartinSVG/SEM-Group-4/all.svg?style=flat-square)](https://github.comMartinSVG/SEM-Group-4/releases)
 
-Develop Build Status ![develop](https://img.shields.io/github/actions/workflow/status/MartinSVG/SEM-Group-4
-/main.yml?branch=develop)
+Develop Build Status ![develop](https://img.shields.io/github/actions/workflow/status/MartinSVG/SEM-Group-4/main.yml?branch=develop)
