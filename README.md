@@ -13,3 +13,6 @@ Master Build Status![workflow](https://github.com/MartinSVG/SEM-Group-4/actions/
 License [![LICENSE](https://img.shields.io/github/license/MartinSVG/SEM-Group-4.svg?style=flat-square)](https://github.com/MartinSVG/SEM-Group-4/blob/master/LICENSE)
 
 Releases [![Releases](https://img.shields.io/github/release/MartinSVG/SEM-Group-4/all.svg?style=flat-square)](https://github.comMartinSVG/SEM-Group-4/releases)
+
+Develop Build Status ![develop](https://img.shields.io/github/actions/workflow/status/MartinSVG/SEM-Group-4
+/main.yml?branch=develop)
