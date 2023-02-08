@@ -1,4 +1,4 @@
-#Software Engineering Methods - Group 4
+# Software Engineering Methods - Group 4
 
 Group Members:
     Esaias Burnette
@@ -7,9 +7,6 @@ Group Members:
     Elizabeth Sibongile Khosa
     Jesher Olivarez
     Martin Sheen
-
-# Software Engineering Methods
-
 
 Master Build Status![workflow](https://github.com/MartinSVG/SEM-Group-4/actions/workflows/main.yml/badge.svg)
 
