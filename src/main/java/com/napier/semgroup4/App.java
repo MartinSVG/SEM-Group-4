@@ -29,7 +29,7 @@ public class App
                 Thread.sleep(30000);
                 // Connect to database
                 con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
-                System.out.println("Successfully connected!");
+                System.out.println("Successfully connected");
                 // Wait a bit
                 Thread.sleep(10000);
                 // Exit for loop
