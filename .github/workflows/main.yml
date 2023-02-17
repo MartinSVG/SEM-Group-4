@@ -14,6 +14,6 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
       - name: Compile with Maven
-        run: mvn compile
+        run: mvn package
       - name: Run docker compose
         run: docker-compose up --abort-on-container-exit
