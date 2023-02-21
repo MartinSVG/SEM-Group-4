@@ -12,9 +12,9 @@ public class App
 
         // Connect to database
         a.connect();
-        ArrayList<Country> cnt = a.getCountries();
+        ArrayList<Country> countries = a.getCountries();
 
-        System.out.println(cnt.size());
+        a.printCountries(countries);
 
         // Disconnect from database
         a.disconnect();
@@ -93,7 +93,8 @@ public class App
             // Create string for SQL statement
             String strSelect =
                     "SELECT Code, Name, Continent, Region, Population, Capital "
-                            + "FROM country";
+                            + "FROM country "
+                            + "ORDER BY Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
 
@@ -119,17 +120,17 @@ public class App
         }
     }
 
-    public void displayCountry(Country country)
+    public void printCountries(ArrayList<Country> countries)
     {
-        if (country != null)
+        // Print header
+        System.out.println(String.format("%-10s %-15s %-20s %-8s", "Emp No", "First Name", "Last Name", "Salary"));
+        // Loop over all employees in the list
+        for (Country cnt : countries)
         {
-            System.out.println(
-                    country.countryID + "\n"
-                            + country.name + "\n"
-                            + country.continent + "\n"
-                            + country.region + "\n"
-                            + country.population + "\n"
-                            + country.capital + "\n");
+            String emp_string =
+                    String.format("%-10s %-15s %-20s %-8s %-8s %-10s",
+                            cnt.countryID,cnt.name,cnt.continent,cnt.region,cnt.capital,cnt.population);
+            System.out.println(emp_string);
         }
     }
 }
