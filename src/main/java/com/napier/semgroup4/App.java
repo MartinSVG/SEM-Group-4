@@ -1,6 +1,7 @@
 package com.napier.semgroup4;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class App
 {
@@ -11,8 +12,9 @@ public class App
 
         // Connect to database
         a.connect();
-        Country cnt = a.getCountry("AIA");
-        a.displayCountry(cnt);
+        ArrayList<Country> cnt = a.getCountries();
+
+        System.out.println(cnt.size());
 
         // Disconnect from database
         a.disconnect();
@@ -82,7 +84,7 @@ public class App
         }
     }
 
-    public Country getCountry(String ID)
+    public ArrayList<Country> getCountries()
     {
         try
         {
@@ -91,13 +93,12 @@ public class App
             // Create string for SQL statement
             String strSelect =
                     "SELECT Code, Name, Continent, Region, Population, Capital "
-                            + "FROM country "
-                            + "WHERE Code = " + ID;
+                            + "FROM country";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new employee if valid.
-            // Check one is returned
-            if (rset.next())
+
+            ArrayList<Country> countries = new ArrayList<Country>();
+            while (rset.next())
             {
                 Country country = new Country();
                 country.countryID = rset.getString("Code");
@@ -106,10 +107,9 @@ public class App
                 country.region = rset.getString("Region");
                 country.population = rset.getInt("Population");
                 country.capital = rset.getString("Capital");
-                return country;
+                countries.add(country);
             }
-            else
-                return null;
+            return countries;
         }
         catch (Exception e)
         {
