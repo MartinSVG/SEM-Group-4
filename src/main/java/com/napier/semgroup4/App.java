@@ -123,13 +123,16 @@ public class App
     public void printCountries(ArrayList<Country> countries)
     {
         // Print header
-        System.out.println(String.format("%-10s %-15s %-20s %-20s %-20s %-20s", "ID", "Name", "Continent", "Region", "Capital","Population"));
+        System.out.println("---------------------------------------------------------------------------------------------");
+        System.out.printf("%5s %15s %20s %25s %15s %10s", "ID", "NAME", "CONTINENT", "REGION", "POPULATION", "CAPITAL");
+        System.out.println();
+        System.out.println("---------------------------------------------------------------------------------------------");
         // Loop over all employees in the list
         for (Country cnt : countries)
         {
             String emp_string =
-                    String.format("%-10s %-15s %-20s %-20s %-20s %-20s",
-                            cnt.countryID,cnt.name,cnt.continent,cnt.region,cnt.capital,cnt.population);
+                    String.format("%5s %15s %20s %25s %15s %10s",
+                            cnt.countryID,cnt.name,cnt.continent,cnt.region,cnt.population,cnt.capital);
             System.out.println(emp_string);
         }
     }
