@@ -11,5 +11,5 @@ services:
     restart: always
 
     # Remove comment to run on localhost
-    ports:
-      - "3307:3306"
+    # ports:
+      # - "3307:3306"
