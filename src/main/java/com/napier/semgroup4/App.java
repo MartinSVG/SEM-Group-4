@@ -48,7 +48,8 @@ public class App
                 // Wait a bit for db to start
                 Thread.sleep(0);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://localhost:3307/world?useSSL=false", "root", "example");
+                // Use localhost:3307 for local testing if docker db is not working
+                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
                 break;
             }
