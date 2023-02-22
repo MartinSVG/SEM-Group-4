@@ -95,6 +95,7 @@ public class App
                     "SELECT Code, Name, Continent, Region, Population, Capital "
                             + "FROM country "
                             + "ORDER BY Population DESC";
+
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
 
@@ -107,7 +108,7 @@ public class App
                 country.continent = rset.getString("Continent");
                 country.region = rset.getString("Region");
                 country.population = rset.getInt("Population");
-                country.capital = rset.getString("Capital");
+                country.capital = getCapital(rset.getInt("Capital"));
                 countries.add(country);
             }
             return countries;
@@ -120,18 +121,47 @@ public class App
         }
     }
 
+    public String getCapital(int ID)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Name "
+                            + "FROM city "
+                            + "WHERE ID = " + ID;
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            if (rset.next())
+            {
+                return rset.getString("Name");
+            }
+            else
+                return null;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city name");
+            return null;
+        }
+    }
+
     public void printCountries(ArrayList<Country> countries)
     {
         // Print header
-        System.out.println("---------------------------------------------------------------------------------------------");
-        System.out.printf("%5s %15s %20s %25s %15s %10s", "ID", "NAME", "CONTINENT", "REGION", "POPULATION", "CAPITAL");
+        System.out.println("-------------------------------------------------------------------------------------------------");
+        System.out.printf("%5s %15s %25s %25s %15s %10s", "ID", "NAME", "CONTINENT", "REGION", "POPULATION", "CAPITAL");
         System.out.println();
-        System.out.println("---------------------------------------------------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------------------------------------");
         // Loop over all employees in the list
         for (Country cnt : countries)
         {
             String emp_string =
-                    String.format("%5s %15s %20s %25s %15s %10s",
+                    String.format("%3s %15s %25s %25s %15s %10s",
                             cnt.countryID,cnt.name,cnt.continent,cnt.region,cnt.population,cnt.capital);
             System.out.println(emp_string);
         }
