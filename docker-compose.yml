@@ -10,6 +10,6 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     restart: always
 
-    # Edit port to run on localhost
+    # Remove comment to run on localhost
     #ports:
       #- "3307:3306"

@@ -1,7 +1,7 @@
 package com.napier.semgroup4;
 import java.util.ArrayList;
 import java.util.Scanner;
-public class Main_UC2 {
+public class Main_City_Report {
     public static void main(String[] args)
     {
         // Create new Application
