@@ -95,7 +95,7 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT city.ID, city.Name, city.CountryCode, city.District, city.Population "
+                    "SELECT city.Name, city.CountryCode, city.District, city.Population "
                             + "FROM city "
                             + "ORDER BY city.Population DESC";
             // Execute SQL statement
@@ -105,7 +105,6 @@ public class App
             while (rset.next())
             {
                 City cit = new City();
-                cit.ID = rset.getInt("city.ID");
                 cit.Name = rset.getString("city.Name");
                 cit.CountryCode = rset.getString("city.CountryCode");
                 cit.District = rset.getString("city.District");
@@ -119,6 +118,23 @@ public class App
             System.out.println(e.getMessage());
             System.out.println("Failed to get salary details");
             return null;
+        }
+    }
+
+    /**
+     * Prints a list of cities.
+     * @param cities The list of cities to print.
+     */
+    public void printAllCities(ArrayList<City> cities)
+    {
+        // Print header
+        System.out.println(String.format("%-35s %-18s %-25s %-15s", "Name", "Country Code", "District", "Population"));        // Loop over all cities in the list
+        for (City cit : cities)
+        {
+            String emp_string =
+                    String.format("%-35s %-18s %-25s %-15s",
+                            cit.Name, cit.CountryCode, cit.District, cit.Population);
+            System.out.println(emp_string);
         }
     }
 

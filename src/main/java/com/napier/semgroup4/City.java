@@ -5,11 +5,6 @@ package com.napier.semgroup4;
  */
 public class City {
     /**
-     * City ID
-     */
-    public int ID;
-
-    /**
      * City Name
      */
     public String Name;
