@@ -96,6 +96,9 @@ public class App
         }
     }
 
+    /**
+     * Function that retrieves countries from the database
+     */
     public ArrayList<Country> getCountries(String clause)
     {
         try
@@ -143,7 +146,9 @@ public class App
         }
     }
 
-
+    /**
+     * Function that returns the name of a city using the ID
+     */
     public String getCapital(int ID)
     {
         try
@@ -173,6 +178,9 @@ public class App
         }
     }
 
+    /**
+     * Prints the countries retrieved from the database
+     */
     public void printCountries(ArrayList<Country> countries)
     {
         // Print header
@@ -180,7 +188,7 @@ public class App
         System.out.printf("%5s %15s %25s %25s %15s %10s", "ID", "NAME", "CONTINENT", "REGION", "POPULATION", "CAPITAL");
         System.out.println();
         System.out.println("-------------------------------------------------------------------------------------------------");
-        // Loop over all employees in the list
+        // Loop over all countries in the list
         for (Country cnt : countries)
         {
             String emp_string =
