@@ -12,7 +12,7 @@ public class App
 
         // Connect to database
         a.connect();
-        ArrayList<Country> countries = a.getCountries();
+        ArrayList<Country> countries = a.getCountries("WHERE Continent = 'Asia' ");
 
         a.printCountries(countries);
 
@@ -84,17 +84,27 @@ public class App
         }
     }
 
-    public ArrayList<Country> getCountries()
+    public ArrayList<Country> getCountries(String clause)
     {
         try
         {
             // Create an SQL statement
             Statement stmt = con.createStatement();
+            String strSelect = "";
             // Create string for SQL statement
-            String strSelect =
-                    "SELECT Code, Name, Continent, Region, Population, Capital "
-                            + "FROM country "
-                            + "ORDER BY Population DESC";
+            if (clause.isEmpty()){
+                strSelect =
+                        "SELECT Code, Name, Continent, Region, Population, Capital "
+                                + "FROM country "
+                                + "ORDER BY Population DESC";
+            }
+            else {
+                strSelect =
+                        "SELECT Code, Name, Continent, Region, Population, Capital "
+                                + "FROM country "
+                                + clause
+                                + "ORDER BY Population DESC";
+            }
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
