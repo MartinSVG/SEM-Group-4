@@ -49,7 +49,7 @@ public class App
                 Thread.sleep(0);
                 // Connect to database
                 // Use localhost:3307 for local testing if docker db is not working
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3307/world?useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
                 break;
             }
@@ -96,8 +96,9 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT city.Name, city.CountryCode, city.District, city.Population "
-                            + "FROM city "
+                    "SELECT city.Name, city.CountryCode, city.District, city.Population, country.Continent "
+                            + "FROM city, country "
+                            + "WHERE city.CountryCode = country.code "
                             + "ORDER BY city.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -110,6 +111,9 @@ public class App
                 cit.CountryCode = rset.getString("city.CountryCode");
                 cit.District = rset.getString("city.District");
                 cit.Population = rset.getInt("city.Population");
+                cit.Continent = rset.getString("country.Continent");
+               // cit.Region = rset.getString("country.Region");
+               // cit.Country = rset.getString("country.Name");
                 cities.add(cit);
             }
             return cities;
@@ -129,13 +133,30 @@ public class App
     public void printAllCities(ArrayList<City> cities)
     {
         // Print header
-        System.out.println(String.format("%-35s %-18s %-25s %-15s", "Name", "Country Code", "District", "Population"));        // Loop over all cities in the list
+        System.out.println(String.format("%-35s %-18s %-25s %-15s", "City Name", "Country Code", "District", "Population"));        // Loop over all cities in the list
         for (City cit : cities)
         {
-            String emp_string =
+            String cit_string =
                     String.format("%-35s %-18s %-25s %-15s",
                             cit.Name, cit.CountryCode, cit.District, cit.Population);
-            System.out.println(emp_string);
+            System.out.println(cit_string);
+        }
+    }
+
+    /**
+     * Prints a list of cities.
+     * @param citiesContinent The list of cities to print by continent.
+     */
+    public void printCitiesContinent(ArrayList<City> citiesContinent)
+    {
+        // Print header
+        System.out.println(String.format("%-15s %-15s %-18s %-25s %-15s", "Continent", "Country Code","City Name", "District", "Population"));        // Loop over all cities in the list
+        for (City cit : citiesContinent)
+        {
+            String cit_string =
+                    String.format("%-15s %-15s %-18s %-25s %-15s",
+                            cit.Continent, cit.CountryCode, cit.Name,  cit.District, cit.Population);
+            System.out.println(cit_string);
         }
     }
 

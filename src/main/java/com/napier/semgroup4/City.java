@@ -24,4 +24,19 @@ public class City {
      */
     public int Population;
 
+    /**
+     * City Continent
+     */
+    public String Continent;
+
+    /**
+     * City Region
+     */
+    public String Region;
+
+    /**
+     * City Country
+     */
+    public String Country;
+
 }
