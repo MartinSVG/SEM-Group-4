@@ -12,9 +12,21 @@ public class App
 
         // Connect to database
         a.connect();
-        ArrayList<Country> countries = a.getCountries("WHERE Continent = 'Asia' ");
 
-        a.printCountries(countries);
+        // Print all countries in the world from the largest population to smallest
+        System.out.println("All countries in the world - Largest Population to Smallest:");
+        a.printCountries(a.getCountries(""));
+        System.out.println();
+
+        // Print all countries in a continent from the largest population to smallest
+        System.out.println("All countries in a continent - Largest Population to Smallest:");
+        a.printCountries(a.getCountries("WHERE Continent = 'North America' "));
+        System.out.println();
+
+        //Print all countries in a region from the largest population to smallest
+        System.out.println("All countries in a region - Largest Population to Smallest:");
+        a.printCountries(a.getCountries("WHERE Region = 'Eastern Asia' "));
+        System.out.println();
 
         // Disconnect from database
         a.disconnect();
@@ -130,6 +142,7 @@ public class App
             return null;
         }
     }
+
 
     public String getCapital(int ID)
     {
