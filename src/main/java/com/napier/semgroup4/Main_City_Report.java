@@ -15,8 +15,8 @@ public class Main_City_Report {
         ArrayList<City> cities = a.getAllCities();
 
         // Test the size of the returned data - should be 4079
-        //System.out.println("The number of Cities in the world are:");
-        //System.out.println(cities.size());
+        System.out.println("The number of Cities in the world are:");
+        System.out.println(cities.size());
         System.out.println();
 
         //Give user an option to select city report organised by largest population to smallest
@@ -32,16 +32,21 @@ public class Main_City_Report {
 
         if (choice == 1) {
                         //Print a list of all cities in the world organized by largest to smallest population
+                        System.out.println();
                         System.out.println("All the cities in the world organized by largest to smallest population:");
                         a.printAllCities(cities);
 
                 } else if (choice == 2) {
                         //Print a list of all cities in a continent organized by largest to smallest population
+                        System.out.println();
                         System.out.println("All the cities in a continent organised by largest population to smallest:");
-                        a.printCitiesContinent(cities);
+                        a.printCityContinent(cities);
                 }
                   else if (choice == 3) {
-                    System.out.println("You selected Option C");
+                        //Print a list of all cities in a region organized by largest to smallest population
+                        System.out.println();
+                        System.out.println("All the cities in a region organised by largest population to smallest:");
+                        a.printCityRegion(cities);
                 }
                   else if (choice == 4) {
                     System.out.println("You selected Option D");

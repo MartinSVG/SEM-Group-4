@@ -96,7 +96,7 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT city.Name, city.CountryCode, city.District, city.Population, country.Continent "
+                    "SELECT city.Name, city.CountryCode, city.District, city.Population, country.Continent, country.Region "
                             + "FROM city, country "
                             + "WHERE city.CountryCode = country.code "
                             + "ORDER BY city.Population DESC";
@@ -112,7 +112,7 @@ public class App
                 cit.District = rset.getString("city.District");
                 cit.Population = rset.getInt("city.Population");
                 cit.Continent = rset.getString("country.Continent");
-               // cit.Region = rset.getString("country.Region");
+                cit.Region = rset.getString("country.Region");
                // cit.Country = rset.getString("country.Name");
                 cities.add(cit);
             }
@@ -145,17 +145,34 @@ public class App
 
     /**
      * Prints a list of cities.
-     * @param citiesContinent The list of cities to print by continent.
+     * @param cityContinent The list of cities to print by continent.
      */
-    public void printCitiesContinent(ArrayList<City> citiesContinent)
+    public void printCityContinent(ArrayList<City> cityContinent)
     {
         // Print header
         System.out.println(String.format("%-15s %-15s %-18s %-25s %-15s", "Continent", "Country Code","City Name", "District", "Population"));        // Loop over all cities in the list
-        for (City cit : citiesContinent)
+        for (City cit : cityContinent)
         {
             String cit_string =
                     String.format("%-15s %-15s %-18s %-25s %-15s",
                             cit.Continent, cit.CountryCode, cit.Name,  cit.District, cit.Population);
+            System.out.println(cit_string);
+        }
+    }
+
+    /**
+     * Prints a list of cities.
+     * @param cityRegion The list of cities to print by continent.
+     */
+    public void printCityRegion(ArrayList<City> cityRegion)
+    {
+        // Print header
+        System.out.println(String.format("%-27s %-15s %-18s %-25s %-15s", "Region", "Country Code","City Name", "District", "Population"));        // Loop over all cities in the list
+        for (City cit : cityRegion)
+        {
+            String cit_string =
+                    String.format("%-27s %-15s %-18s %-25s %-15s",
+                            cit.Region, cit.CountryCode, cit.Name,  cit.District, cit.Population);
             System.out.println(cit_string);
         }
     }
