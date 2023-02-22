@@ -49,7 +49,10 @@ public class Main_City_Report {
                         a.printCityRegion(cities);
                 }
                   else if (choice == 4) {
-                    System.out.println("You selected Option D");
+                        //Print a list of all cities in a country organized by largest to smallest population
+                        System.out.println();
+                        System.out.println("All the cities in a country organised by largest population to smallest:");
+                        a.printCityCountry(cities);
                 }
                   else if (choice == 5) {
                     System.out.println("You selected Option E");

@@ -96,7 +96,7 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT city.Name, city.CountryCode, city.District, city.Population, country.Continent, country.Region "
+                    "SELECT city.Name, city.CountryCode, city.District, city.Population, country.Continent, country.Region, country.Name "
                             + "FROM city, country "
                             + "WHERE city.CountryCode = country.code "
                             + "ORDER BY city.Population DESC";
@@ -113,7 +113,7 @@ public class App
                 cit.Population = rset.getInt("city.Population");
                 cit.Continent = rset.getString("country.Continent");
                 cit.Region = rset.getString("country.Region");
-               // cit.Country = rset.getString("country.Name");
+                cit.Country = rset.getString("country.Name");
                 cities.add(cit);
             }
             return cities;
@@ -173,6 +173,23 @@ public class App
             String cit_string =
                     String.format("%-27s %-15s %-18s %-25s %-15s",
                             cit.Region, cit.CountryCode, cit.Name,  cit.District, cit.Population);
+            System.out.println(cit_string);
+        }
+    }
+
+    /**
+     * Prints a list of cities.
+     * @param cityCountry The list of cities to print by continent.
+     */
+    public void printCityCountry(ArrayList<City> cityCountry)
+    {
+        // Print header
+        System.out.println(String.format("%-27s %-15s %-18s %-25s %-15s", "Country", "Country Code","City Name", "District", "Population"));        // Loop over all cities in the list
+        for (City cit : cityCountry)
+        {
+            String cit_string =
+                    String.format("%-27s %-15s %-18s %-25s %-15s",
+                            cit.Country, cit.CountryCode, cit.Name,  cit.District, cit.Population);
             System.out.println(cit_string);
         }
     }
