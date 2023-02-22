@@ -1,6 +1,7 @@
 package com.napier.semgroup4;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class App
 {
@@ -79,6 +80,45 @@ public class App
             {
                 System.out.println("Error closing connection to database");
             }
+        }
+    }
+
+    /**
+     * Gets all the cities and population in the world.
+     * @return A list of all cities and population, or null if there is an error.
+     */
+    public ArrayList<City> getAllCities()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.ID, city.Name, city.CountryCode, city.District, city.Population "
+                            + "FROM city "
+                            + "ORDER BY city.Population DESC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next())
+            {
+                City cit = new City();
+                cit.ID = rset.getInt("city.ID");
+                cit.Name = rset.getString("city.Name");
+                cit.CountryCode = rset.getString("city.CountryCode");
+                cit.District = rset.getString("city.District");
+                cit.Population = rset.getInt("city.Population");
+                cities.add(cit);
+            }
+            return cities;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get salary details");
+            return null;
         }
     }
 
