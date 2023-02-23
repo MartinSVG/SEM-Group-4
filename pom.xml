@@ -31,7 +31,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.napier.semgroup4.Main_City_Report</mainClass>
+                            <mainClass>com.napier.semgroup4.App</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
