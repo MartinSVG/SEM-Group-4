@@ -3,6 +3,9 @@ services:
   # Application Dockerfile is in same folder which is .
   app:
     build: .
+    stdin_open: true
+    tty: true
+
 
   # db is in db folder
   db:
@@ -12,4 +15,4 @@ services:
 
     # Remove comment to run on localhost
     # ports:
-      # - "3307:3306"
+      #- "3307:3306"
