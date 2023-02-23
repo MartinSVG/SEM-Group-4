@@ -15,19 +15,33 @@ public class App
 
         // Print all countries in the world from the largest population to smallest
         System.out.println("All countries in the world - Largest Population to Smallest:");
-        a.printCountries(a.getCountries(""));
+        a.printCountries(a.getCountries("",-1));
         System.out.println();
 
         // Print all countries in a continent from the largest population to smallest
         System.out.println("All countries in a continent - Largest Population to Smallest:");
-        a.printCountries(a.getCountries("WHERE Continent = 'North America' "));
+        a.printCountries(a.getCountries("WHERE Continent = 'South America' ",-1));
         System.out.println();
 
         //Print all countries in a region from the largest population to smallest
         System.out.println("All countries in a region - Largest Population to Smallest:");
-        a.printCountries(a.getCountries("WHERE Region = 'Eastern Asia' "));
+        a.printCountries(a.getCountries("WHERE Region = 'Eastern Asia' ",-1));
         System.out.println();
 
+        //Print top N countries in the world from the largest population to smallest
+        System.out.println("All top N countries in the world - Largest Population to Smallest:");
+        a.printCountries(a.getCountries("",5));
+        System.out.println();
+
+        //Print top N countries a continent from the largest population to smallest
+        System.out.println("All top N countries in a continent - Largest Population to Smallest:");
+        a.printCountries(a.getCountries("WHERE Continent = 'South America' ",5));
+        System.out.println();
+
+        //Print top N countries a continent from the largest population to smallest
+        System.out.println("All top N countries in a region - Largest Population to Smallest:");
+        a.printCountries(a.getCountries("WHERE Region = 'Eastern Asia' ",5));
+        System.out.println();
         // Disconnect from database
         a.disconnect();
     }
@@ -99,7 +113,7 @@ public class App
     /**
      * Function that retrieves countries from the database
      */
-    public ArrayList<Country> getCountries(String clause)
+    public ArrayList<Country> getCountries(String clause, int top)
     {
         try
         {
@@ -107,18 +121,36 @@ public class App
             Statement stmt = con.createStatement();
             String strSelect = "";
             // Create string for SQL statement
-            if (clause.isEmpty()){
+            if (clause.isEmpty() && top == -1){
                 strSelect =
                         "SELECT Code, Name, Continent, Region, Population, Capital "
                                 + "FROM country "
                                 + "ORDER BY Population DESC";
             }
-            else {
+
+            if (clause.isEmpty() && top != -1){
+                strSelect =
+                        "SELECT Code, Name, Continent, Region, Population, Capital "
+                                + "FROM country "
+                                + "ORDER BY Population DESC "
+                                + "LIMIT " + top;
+            }
+
+            if(!clause.isEmpty() && top == -1) {
                 strSelect =
                         "SELECT Code, Name, Continent, Region, Population, Capital "
                                 + "FROM country "
                                 + clause
                                 + "ORDER BY Population DESC";
+            }
+
+            if(!clause.isEmpty() && top != -1) {
+                strSelect =
+                        "SELECT Code, Name, Continent, Region, Population, Capital "
+                                + "FROM country "
+                                + clause
+                                + "ORDER BY Population DESC "
+                                + "LIMIT " + top;
             }
 
             // Execute SQL statement
