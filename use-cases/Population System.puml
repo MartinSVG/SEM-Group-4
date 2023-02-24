@@ -1,0 +1,62 @@
+@enduml
+
+@startuml
+
+actor RA as "Reporting Analyst"
+
+
+rectangle "Population System" {
+
+    usecase UC1 as "Report On Population \n Information Of All Countries"
+
+    usecase UC2 as "Report On Population \n Information Of All Cities"
+
+    usecase UC3 as "Report On Population \n Information Of All Capital Cities"
+
+    usecase UC4 as "Report On Population \n Information Of People Living In And Out of Cities"
+
+    usecase UC5 as "Report On Population \n Information Of Subgroups In The World"
+
+    usecase UC6 as "Report On Language \n Information Of The World"
+
+
+    usecase UCa as "Country Population"
+
+    usecase UCb as "City Population"
+
+    usecase UCc as "Capital City Population"
+
+    usecase UCd as "People Population"
+
+    usecase UCe as "Subgroup Population"
+
+    usecase UCf as "World Language "
+
+    RA - UC1
+    RA - UC2
+    RA - UC3
+    RA - UC4
+    RA - UC5
+    RA - UC6
+
+    UC1 ..> UCa : include
+    UC2 ..> UCb : include
+    UC3 ..> UCc : include
+    UC4 ..> UCd : include
+    UC5 ..> UCe : include
+    UC6 ..> UCf : include
+}
+
+
+
+rectangle "Database" {
+
+    UC1 - Database
+    UC2 - Database
+    UC3 - Database
+    UC4 - Database
+    UC5 - Database
+    UC6 - Database
+
+}
+@enduml
