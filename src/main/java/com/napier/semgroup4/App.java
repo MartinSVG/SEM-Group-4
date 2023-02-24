@@ -111,7 +111,8 @@ public class App
     }
 
     /**
-     * Function that retrieves countries from the database
+     *  Gets all the current countries.
+     *  @return A list of all countries, or null if there is an error.
      */
     public ArrayList<Country> getCountries(String clause, int top)
     {
@@ -179,7 +180,8 @@ public class App
     }
 
     /**
-     * Function that returns the name of a city using the ID
+     * Prints a list of capital cites.
+     * @param ID The list of capital cities to print.
      */
     public String getCapital(int ID)
     {
@@ -212,6 +214,7 @@ public class App
 
     /**
      * Prints the countries retrieved from the database
+     *  @param countries The list of countries to print.
      */
     public void printCountries(ArrayList<Country> countries)
     {
