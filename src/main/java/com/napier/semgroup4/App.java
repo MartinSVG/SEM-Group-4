@@ -212,7 +212,7 @@ public class App
 
     /**
      *  Gets all the current countries.
-     *  @return A list of all countries, or null if there is an error.
+     *  @return A list of capital cities, or null if there is an error.
      */
     public ArrayList<City> getCapitalCities(String clause, int top)
     {
@@ -258,7 +258,6 @@ public class App
             }
 
             // Execute SQL statement
-            System.out.println(strSelect);
             ResultSet rset = stmt.executeQuery(strSelect);
 
             ArrayList<City> cities = new ArrayList<City>();
@@ -284,8 +283,8 @@ public class App
     }
 
     /**
-     * Prints a list of capital cites.
-     * @param ID The list of capital cities to print.
+     * Prints the name of the Capital City
+     * @param ID The ID of the capital
      */
     public String getCapital(int ID)
     {
