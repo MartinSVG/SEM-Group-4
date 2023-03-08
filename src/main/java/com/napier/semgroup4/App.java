@@ -362,6 +362,8 @@ public class App
         // Loop over all cities in the list
         for (City cty : cities)
         {
+            if (cty == null)
+                continue;
             String emp_string =
                     String.format("%20s %20s %20s",
                             cty.Name,cty.Country,cty.Population);
