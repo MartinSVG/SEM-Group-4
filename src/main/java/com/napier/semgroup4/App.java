@@ -73,6 +73,12 @@ public class App
         a.printCapitalCities(a.getCapitalCities("country.Region = 'Eastern Asia' ",5));
         System.out.println();
 
+        // Generate City Report
+       City_Report.main();
+
+        // Generate Number of City Report
+        N_City_Report.main();
+
         // Disconnect from database
         a.disconnect();
     }
@@ -104,9 +110,9 @@ public class App
             try
             {
                 // Wait a bit for db to start
-                Thread.sleep(30000);
+                Thread.sleep(0);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3307/world?useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
                 break;
             }
@@ -370,4 +376,203 @@ public class App
             System.out.println(emp_string);
         }
     }
+
+    /**
+     * Gets all the cities and population in the world.
+     * @return A list of all cities and population, or null if there is an error.
+     */
+    public ArrayList<City> getAllCities()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, city.CountryCode, city.District, city.Population, country.Continent, country.Region, country.Name "
+                            + "FROM city, country "
+                            + "WHERE city.CountryCode = country.code "
+                            + "ORDER BY city.Population DESC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next())
+            {
+                City cit = new City();
+                cit.Name = rset.getString("city.Name");
+                cit.CountryCode = rset.getString("city.CountryCode");
+                cit.District = rset.getString("city.District");
+                cit.Population = rset.getInt("city.Population");
+                cit.Continent = rset.getString("country.Continent");
+                cit.Region = rset.getString("country.Region");
+                cit.Country = rset.getString("country.Name");
+                cities.add(cit);
+            }
+            return cities;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
+    /**
+     * Prints a list of cities.
+     * @param cities The list of cities to print.
+     */
+    public void printAllCities(ArrayList<City> cities)
+    {
+        // Print header
+        System.out.println("-------------------------------------------------------------------------------------------------");
+        System.out.printf("%-35s %-18s %-25s %-15s%n", "City Name", "Country Code", "District", "Population");
+        System.out.println();
+        System.out.println("-------------------------------------------------------------------------------------------------");
+
+        // Loop over all cities in the list
+        for (City cit : cities)
+        {
+            String cit_string =
+                    String.format("%-35s %-18s %-25s %-15s",
+                            cit.Name, cit.CountryCode, cit.District, cit.Population);
+            System.out.println(cit_string);
+        }
+    }
+
+    /**
+     * Prints a list of cities.
+     * @param cityContinent The list of cities to print by continent.
+     */
+    public void printCityContinent(ArrayList<City> cityContinent)
+    {
+        // Print header
+        System.out.println("-------------------------------------------------------------------------------------------------");
+        System.out.printf("%-15s %-15s %-18s %-25s %-15s%n", "Continent", "Country Code","City Name", "District", "Population");
+        System.out.println();
+        System.out.println("-------------------------------------------------------------------------------------------------");
+        // Loop over all cities in the list
+        for (City cit : cityContinent)
+        {
+            String cit_string =
+                    String.format("%-15s %-15s %-18s %-25s %-15s",
+                            cit.Continent, cit.CountryCode, cit.Name,  cit.District, cit.Population);
+            System.out.println(cit_string);
+        }
+    }
+
+    /**
+     * Prints a list of cities.
+     * @param cityRegion The list of cities to print by continent.
+     */
+    public void printCityRegion(ArrayList<City> cityRegion)
+    {
+        // Print header
+        System.out.println("-------------------------------------------------------------------------------------------------");
+        System.out.printf("%-27s %-15s %-18s %-25s %-15s%n", "Region", "Country Code","City Name", "District", "Population");
+        System.out.println();
+        System.out.println("-------------------------------------------------------------------------------------------------");
+        // Loop over all cities in the list
+        for (City cit : cityRegion)
+        {
+            String cit_string =
+                    String.format("%-27s %-15s %-18s %-25s %-15s",
+                            cit.Region, cit.CountryCode, cit.Name,  cit.District, cit.Population);
+            System.out.println(cit_string);
+        }
+    }
+
+    /**
+     * Prints a list of cities.
+     * @param cityCountry The list of cities to print by continent.
+     */
+    public void printCityCountry(ArrayList<City> cityCountry)
+    {
+        // Print header
+        System.out.println("-------------------------------------------------------------------------------------------------");
+        System.out.printf("%-27s %-15s %-18s %-25s %-15s%n", "Country", "Country Code","City Name", "District", "Population");
+        System.out.println();
+        System.out.println("-------------------------------------------------------------------------------------------------");
+        // Loop over all cities in the list
+        for (City cit : cityCountry)
+        {
+            String cit_string =
+                    String.format("%-27s %-15s %-18s %-25s %-15s",
+                            cit.Country, cit.CountryCode, cit.Name,  cit.District, cit.Population);
+            System.out.println(cit_string);
+        }
+    }
+
+    /**
+     * Prints a list of cities.
+     * @param cityDistrict The list of cities to print by continent.
+     */
+    public void printCityDistrict(ArrayList<City> cityDistrict)
+    {
+        // Print header
+        System.out.println("-------------------------------------------------------------------------------------------------");
+        System.out.printf("%-27s %-15s %-18s %-25s%n", "District", "Country Code","City Name", "Population");
+        System.out.println();
+        System.out.println("-------------------------------------------------------------------------------------------------");
+        // Loop over all cities in the list
+        for (City cit : cityDistrict)
+        {
+            String cit_string =
+                    String.format("%-27s %-15s %-18s %-25s",
+                            cit.District, cit.CountryCode, cit.Name, cit.Population);
+            System.out.println(cit_string);
+        }
+    }
+
+    /**
+     * Gets all the cities and population in the world.
+     * @return A list of all cities and population, or null if there is an error.
+     */
+    public ArrayList<City> getNCities(int top)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            String strSelect = "";
+            // Create string for SQL statement
+
+            if (top != -1) {
+
+                strSelect  =
+                        "SELECT city.Name, city.CountryCode, city.District, city.Population, country.Continent, country.Region, country.Name "
+                                + "FROM city, country "
+                                + "WHERE city.CountryCode = country.code "
+                                + "ORDER BY city.Population DESC"
+                                + "LIMIT" + top;
+            }
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<City> nCities = new ArrayList<City>();
+            while (rset.next())
+            {
+                City cit = new City();
+                cit.Name = rset.getString("city.Name");
+                cit.CountryCode = rset.getString("city.CountryCode");
+                cit.District = rset.getString("city.District");
+                cit.Population = rset.getInt("city.Population");
+                cit.Continent = rset.getString("country.Continent");
+                cit.Region = rset.getString("country.Region");
+                cit.Country = rset.getString("country.Name");
+                nCities.add(cit);
+            }
+            return nCities;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
 }
+
