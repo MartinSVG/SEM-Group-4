@@ -11,7 +11,7 @@ public class App
         App a = new App();
 
         // Connect to database
-        a.connect();
+        //a.connect();
 
         // Print all countries in the world from the largest population to smallest
         System.out.println("All countries in the world - Largest Population to Smallest:");
@@ -110,9 +110,9 @@ public class App
             try
             {
                 // Wait a bit for db to start
-                Thread.sleep(0);
+                Thread.sleep(30000);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://localhost:3307/world?useSSL=false", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
                 break;
             }
@@ -420,6 +420,52 @@ public class App
     }
 
     /**
+     * Gets all the cities and population in the world.
+     * @return A list of all cities and population, or null if there is an error.
+     */
+    public ArrayList<City> getNCities(int top)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+
+            String strSelect  =
+                        "SELECT city.Name, city.CountryCode, city.District, city.Population, country.Continent, country.Region, country.Name "
+                                + "FROM city, country "
+                                + "WHERE city.CountryCode = country.code "
+                                + "ORDER BY city.Population DESC "
+                                + "LIMIT " + top;
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next())
+            {
+                City cit = new City();
+                cit.Name = rset.getString("city.Name");
+                cit.CountryCode = rset.getString("city.CountryCode");
+                cit.District = rset.getString("city.District");
+                cit.Population = rset.getInt("city.Population");
+                cit.Continent = rset.getString("country.Continent");
+                cit.Region = rset.getString("country.Region");
+                cit.Country = rset.getString("country.Name");
+                cities.add(cit);
+            }
+            return cities;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
+    /**
      * Prints a list of cities.
      * @param cities The list of cities to print.
      */
@@ -525,54 +571,7 @@ public class App
         }
     }
 
-    /**
-     * Gets all the cities and population in the world.
-     * @return A list of all cities and population, or null if there is an error.
-     */
-    public ArrayList<City> getNCities(int top)
-    {
-        try
-        {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            String strSelect = "";
-            // Create string for SQL statement
 
-            if (top != -1) {
-
-                strSelect  =
-                        "SELECT city.Name, city.CountryCode, city.District, city.Population, country.Continent, country.Region, country.Name "
-                                + "FROM city, country "
-                                + "WHERE city.CountryCode = country.code "
-                                + "ORDER BY city.Population DESC"
-                                + "LIMIT" + top;
-            }
-
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract city information
-            ArrayList<City> nCities = new ArrayList<City>();
-            while (rset.next())
-            {
-                City cit = new City();
-                cit.Name = rset.getString("city.Name");
-                cit.CountryCode = rset.getString("city.CountryCode");
-                cit.District = rset.getString("city.District");
-                cit.Population = rset.getInt("city.Population");
-                cit.Continent = rset.getString("country.Continent");
-                cit.Region = rset.getString("country.Region");
-                cit.Country = rset.getString("country.Name");
-                nCities.add(cit);
-            }
-            return nCities;
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get city details");
-            return null;
-        }
-    }
 
 }
 

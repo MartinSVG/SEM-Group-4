@@ -10,40 +10,45 @@ public class N_City_Report {
         a.connect();
         System.out.println();
 
-        // Extract City information
-        ArrayList<City> cities = a.getAllCities();
+        int num1 = 5;
+        int num2 = 7;
+        int num3 = 4;
+        int num4 = 3;
+        int num5 = 6;
 
-        // Test the size of the returned data - should be 4079
-        System.out.println("The number of Cities in the world are:");
-        System.out.println(cities.size());
-        System.out.println();
+        // Extract City information
+        ArrayList<City> world = a.getNCities(num1);
+        ArrayList<City> continent = a.getNCities(num2);
+        ArrayList<City> region = a.getNCities(num3);
+        ArrayList<City> country = a.getNCities(num4);
+        ArrayList<City> district = a.getNCities(num5);
 
 
         //Print a list of all cities in the world organized by largest to smallest population
         System.out.println();
-        System.out.println("All the cities in the world organized by largest to smallest population:");
-        a.printAllCities(a.getNCities(5));
+        System.out.println("The top " + num1 + " populated cities in the world:");
+        a.printAllCities(world);
 
 
         //Print a list of all cities in a continent organized by largest to smallest population
         System.out.println();
-        System.out.println("All the cities in a continent organised by largest population to smallest:");
-        a.printCityContinent(a.getNCities(5));
+        System.out.println("The top " + num2 + " populated cities in a continent:");
+        a.printCityContinent(continent);
 
         //Print a list of all cities in a region organized by largest to smallest population
         System.out.println();
-        System.out.println("All the cities in a region organised by largest population to smallest:");
-        a.printCityRegion(a.getNCities(5));
+        System.out.println("The top " + num3 + " populated cities in a region:");
+        a.printCityRegion(region);
 
         //Print a list of all cities in a country organized by largest to smallest population
         System.out.println();
-        System.out.println("All the cities in a country organised by largest population to smallest:");
-        a.printCityCountry(a.getNCities(5));
+        System.out.println("The top " + num4 + " populated cities in a country:");
+        a.printCityCountry(country);
 
         //Print a list of all cities in a district organized by largest to smallest population
         System.out.println();
-        System.out.println("All the cities in a district organised by largest population to smallest:");
-        a.printCityDistrict(a.getNCities(5));
+        System.out.println("The top " + num5 + " populated cities in a district:");
+        a.printCityDistrict(district);
 
     }
 }
