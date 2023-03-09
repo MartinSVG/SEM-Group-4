@@ -28,7 +28,7 @@ The reporting analyst requests for population information of cities.
 None
 
 ## SUB-VARIATIONS
-None
+As a reporting analyst of the Global Population Census Bureau, I want to have easy access to the population information of cities, so that I can provide the organisation with population reports.
 
 ## SCHEDULE
 DUE DATE: Release 0.1.0.2
