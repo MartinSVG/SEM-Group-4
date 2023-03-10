@@ -27,7 +27,12 @@ The reporting analyst requests for language information of the world.
 None
 
 ## SUB-VARIATIONS
-None
+1. As a reporting analyst of the Global Population Census Bureau, I want to have easy access to the population information of the Chinese speakers in the world organised by largest to smallest, so that I can provide the organisation with population reports.
+2. As a reporting analyst of the Global Population Census Bureau, I want to have easy access to the population information of the English speakers in the world organised by largest to smallest, so that I can provide the organisation with population reports.
+3. As a reporting analyst of the Global Population Census Bureau, I want to have easy access to the population information of the Hindi speakers in the world organised by largest to smallest, so that I can provide the organisation with population reports.
+4. As a reporting analyst of the Global Population Census Bureau, I want to have easy access to the population information of the Spanish speakers in the world organised by largest to smallest, so that I can provide the organisation with population reports.
+5. As a reporting analyst of the Global Population Census Bureau, I want to have easy access to the population information of the Arabic speakers in the world organised by largest to smallest, so that I can provide the organisation with population reports.
+
 
 ## SCHEDULE
 DUE DATE: Release 0.1.0.6
