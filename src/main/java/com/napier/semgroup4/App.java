@@ -11,7 +11,7 @@ public class App
         App a = new App();
 
         // Connect to database
-        //a.connect();
+        a.connect();
 
         // Print all countries in the world from the largest population to smallest
         System.out.println("All countries in the world - Largest Population to Smallest:");
@@ -74,7 +74,7 @@ public class App
         System.out.println();
 
         // Generate City Report
-       City_Report.main();
+        City_Report.main();
 
         // Generate Number of City Report
         N_City_Report.main();
