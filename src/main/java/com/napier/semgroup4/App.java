@@ -76,9 +76,6 @@ public class App
         // Generate City Report
         City_Report.main();
 
-        // Generate Number of City Report
-        N_City_Report.main();
-
         // Disconnect from database
         a.disconnect();
     }
@@ -126,6 +123,34 @@ public class App
                 System.out.println("Thread interrupted? Should not happen.");
             }
         }
+    }
+
+    public void fastconnect()
+    {
+        try
+        {
+            // Load Database driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        }
+
+        catch (ClassNotFoundException e)
+        {
+            System.out.println("Could not load SQL driver");
+            System.exit(-1);
+        }
+
+        try
+        {
+            // Connect to database
+            con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
+        }
+
+        catch (SQLException sqle)
+        {
+            System.out.println("Failed to connect to database attempt ");
+            System.out.println(sqle.getMessage());
+        }
+
     }
 
     /**
@@ -381,7 +406,7 @@ public class App
      * Gets all the cities and population in the world.
      * @return A list of all cities and population, or null if there is an error.
      */
-    public ArrayList<City> getAllCities()
+    public ArrayList<City> getAllCities(String clause)
     {
         try
         {
@@ -391,8 +416,9 @@ public class App
             String strSelect =
                     "SELECT city.Name, city.CountryCode, city.District, city.Population, country.Continent, country.Region, country.Name "
                             + "FROM city, country "
-                            + "WHERE city.CountryCode = country.code "
-                            + "ORDER BY city.Population DESC";
+                            + "WHERE city.CountryCode = country.Code AND " + clause
+                            + "ORDER BY city.Population DESC ";
+
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract city information
@@ -423,7 +449,7 @@ public class App
      * Gets all the cities and population in the world.
      * @return A list of all cities and population, or null if there is an error.
      */
-    public ArrayList<City> getNCities(int top)
+    public ArrayList<City> getNCities(String clause, int top)
     {
         try
         {
@@ -435,7 +461,7 @@ public class App
             String strSelect  =
                         "SELECT city.Name, city.CountryCode, city.District, city.Population, country.Continent, country.Region, country.Name "
                                 + "FROM city, country "
-                                + "WHERE city.CountryCode = country.code "
+                                + "WHERE city.CountryCode = country.code AND " + clause
                                 + "ORDER BY city.Population DESC "
                                 + "LIMIT " + top;
 
@@ -473,16 +499,15 @@ public class App
     {
         // Print header
         System.out.println("-------------------------------------------------------------------------------------------------");
-        System.out.printf("%-35s %-18s %-25s %-15s%n", "City Name", "Country Code", "District", "Population");
+        System.out.printf("%-25s %-30s %-20s %-15s", "City Name", "Country", "District", "Population");
         System.out.println();
         System.out.println("-------------------------------------------------------------------------------------------------");
-
         // Loop over all cities in the list
         for (City cit : cities)
         {
             String cit_string =
-                    String.format("%-35s %-18s %-25s %-15s",
-                            cit.Name, cit.CountryCode, cit.District, cit.Population);
+                    String.format("%-25s %-30s %-20s %-15s",
+                            cit.Name, cit.Country, cit.District, cit.Population);
             System.out.println(cit_string);
         }
     }
@@ -495,15 +520,15 @@ public class App
     {
         // Print header
         System.out.println("-------------------------------------------------------------------------------------------------");
-        System.out.printf("%-15s %-15s %-18s %-25s %-15s%n", "Continent", "Country Code","City Name", "District", "Population");
+        System.out.printf("%-30s %-30s %-20s %-15s", "City Name", "Country", "District", "Population");
         System.out.println();
         System.out.println("-------------------------------------------------------------------------------------------------");
         // Loop over all cities in the list
         for (City cit : cityContinent)
         {
             String cit_string =
-                    String.format("%-15s %-15s %-18s %-25s %-15s",
-                            cit.Continent, cit.CountryCode, cit.Name,  cit.District, cit.Population);
+                    String.format("%-30s %-30s %-20s %-15s",
+                            cit.Name, cit.Country, cit.District, cit.Population);
             System.out.println(cit_string);
         }
     }
@@ -516,15 +541,15 @@ public class App
     {
         // Print header
         System.out.println("-------------------------------------------------------------------------------------------------");
-        System.out.printf("%-27s %-15s %-18s %-25s %-15s%n", "Region", "Country Code","City Name", "District", "Population");
+        System.out.printf("%-25s %-40s %-20s %-15s", "City Name", "Country", "District", "Population");
         System.out.println();
         System.out.println("-------------------------------------------------------------------------------------------------");
         // Loop over all cities in the list
         for (City cit : cityRegion)
         {
             String cit_string =
-                    String.format("%-27s %-15s %-18s %-25s %-15s",
-                            cit.Region, cit.CountryCode, cit.Name,  cit.District, cit.Population);
+                    String.format("%-25s %-40s %-20s %-15s",
+                            cit.Name, cit.Country, cit.District, cit.Population);
             System.out.println(cit_string);
         }
     }
@@ -537,15 +562,15 @@ public class App
     {
         // Print header
         System.out.println("-------------------------------------------------------------------------------------------------");
-        System.out.printf("%-27s %-15s %-18s %-25s %-15s%n", "Country", "Country Code","City Name", "District", "Population");
+        System.out.printf("%-30s %-30s %-20s %-15s", "City Name", "Country", "District", "Population");
         System.out.println();
         System.out.println("-------------------------------------------------------------------------------------------------");
         // Loop over all cities in the list
         for (City cit : cityCountry)
         {
             String cit_string =
-                    String.format("%-27s %-15s %-18s %-25s %-15s",
-                            cit.Country, cit.CountryCode, cit.Name,  cit.District, cit.Population);
+                    String.format("%-30s %-30s %-20s %-15s",
+                            cit.Name, cit.Country, cit.District, cit.Population);
             System.out.println(cit_string);
         }
     }
@@ -558,15 +583,15 @@ public class App
     {
         // Print header
         System.out.println("-------------------------------------------------------------------------------------------------");
-        System.out.printf("%-27s %-15s %-18s %-25s%n", "District", "Country Code","City Name", "Population");
+        System.out.printf("%-25s %-30s %-20s %-15s", "City Name", "Country", "District", "Population");
         System.out.println();
         System.out.println("-------------------------------------------------------------------------------------------------");
         // Loop over all cities in the list
         for (City cit : cityDistrict)
         {
             String cit_string =
-                    String.format("%-27s %-15s %-18s %-25s",
-                            cit.District, cit.CountryCode, cit.Name, cit.Population);
+                    String.format("%-25s %-30s %-20s %-15s",
+                            cit.Name, cit.Country, cit.District, cit.Population);
             System.out.println(cit_string);
         }
     }
