@@ -34,7 +34,13 @@ jobs:
           mvn -Dtest=com.napier.semgroup4.AppIntegrationTest test
           docker stop world
           docker rm world
-          docker image rm database   
+          docker image rm database
+      - name: CodeCov
+        uses: codecov/codecov-action@v2
+        with:
+          directory: ./target/site/jacoco
+          flags: Integration Tests
+          verbose: true
 
   build:
     name: Group 4 SEM - Build and Start Using docker-compose
