@@ -27,4 +27,12 @@ public class AppIntegrationTest
         countries = app.getCountries("",5);
         assertEquals(countries.size(),5);
     }
+
+    @Test
+    void testTopFivePopulatedCapitalCitiesInTheWorld()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        cities = app.getCapitalCities("",5);
+        assertEquals(cities.size(),5);
+    }
 }
