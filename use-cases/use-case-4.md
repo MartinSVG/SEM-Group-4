@@ -28,7 +28,10 @@ The reporting analyst requests for population information of people living in an
 None
 
 ## SUB-VARIATIONS
-None
+1. As a reporting analyst of the Global Population Census Bureau, I want to have easy access to the population information of people, people living in cities, and people not living in cities in a continent, so that I can provide the organisation with population reports.
+2. As a reporting analyst of the Global Population Census Bureau, I want to have easy access to the population information of people, people living in cities, and people not living in cities in a region, so that I can provide the organisation with population reports.
+3. As a reporting analyst of the Global Population Census Bureau, I want to have easy access to the population information of people, people living in cities, and people not living in cities in a country, so that I can provide the organisation with population reports.
+
 
 ## SCHEDULE
 DUE DATE: Release 0.1.0.4

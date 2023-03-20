@@ -28,7 +28,12 @@ The reporting analyst requests for population information of capital cities.
 None
 
 ## SUB-VARIATIONS
-None
+1. As a reporting analyst of the Global Population Census Bureau, I want to have easy access to the population information of capital cities in the world organised by largest to smallest, so that I can provide the organisation with population reports.
+2. As a reporting analyst of the Global Population Census Bureau, I want to have easy access to the population information of capital cities in a continent organised by largest to smallest, so that I can provide the organisation with population reports.
+3. As a reporting analyst of the Global Population Census Bureau, I want to have easy access to the population information of capital cities in a region organised by largest to smallest, so that I can provide the organisation with population reports.
+4. As a reporting analyst of the Global Population Census Bureau, I want to have easy access to any number of top populated capital cities in the world, so that I can provide the organisation with population reports.
+5. As a reporting analyst of the Global Population Census Bureau, I want to have easy access to any number of top populated capital cities in a continent, so that I can provide the organisation with population reports.
+6. As a reporting analyst of the Global Population Census Bureau, I want to have easy access to any number of top populated capital cities in a region, so that I can provide the organisation with population reports.
 
 ## SCHEDULE
 DUE DATE: Release 0.1.0.3
