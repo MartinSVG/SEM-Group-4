@@ -17,119 +17,19 @@ public class App
             a.connect(args[0], Integer.parseInt(args[1]));
         }
 
-        // Print all countries in the world from the largest population to smallest
-        System.out.println("All countries in the world - Largest Population to Smallest:");
-        a.printCountries(a.getCountries("",-1));
-        System.out.println();
+//        // Prints Reports for Countries feature
+//        Country_Report.main(a);
 
-        // Print all countries in a continent from the largest population to smallest
-        System.out.println("All countries in a continent (South America) - Largest Population to Smallest:");
-        a.printCountries(a.getCountries("WHERE Continent = 'South America'",-1));
-        System.out.println();
-
-        //Print all countries in a region from the largest population to smallest
-        System.out.println("All countries in a region (Eastern Asia) - Largest Population to Smallest:");
-        a.printCountries(a.getCountries("WHERE Region = 'Eastern Asia'",-1));
-        System.out.println();
-
-        //Print top N countries in the world from the largest population to smallest
-        System.out.println("All top 5 countries in the world - Largest Population to Smallest:");
-        a.printCountries(a.getCountries("",5));
-        System.out.println();
-
-        //Print top N countries a continent from the largest population to smallest
-        System.out.println("All top 5 countries in a continent (South America) - Largest Population to Smallest:");
-        a.printCountries(a.getCountries("WHERE Continent = 'South America'",5));
-        System.out.println();
-
-        //Print top N countries a region from the largest population to smallest
-        System.out.println("All top 5 countries in a region (Eastern Asia) - Largest Population to Smallest:");
-        a.printCountries(a.getCountries("WHERE Region = 'Eastern Asia'",5));
-        System.out.println();
-
-        // Print all cities in the world from the largest population to smallest
-        System.out.println("All cities in the world - Largest Population to Smallest:");
-        a.printCities(a.getCities("",-1));
-        System.out.println();
-
-        // Print all cities in a continent from the largest population to smallest
-        System.out.println("All cities in a continent (North America) - Largest Population to Smallest:");
-        a.printCities(a.getCities("country.Continent = 'North America'",-1));
-        System.out.println();
-
-        // Print all cities in a region from the largest population to smallest
-        System.out.println("All cities in a region (Caribbean) - Largest Population to Smallest:");
-        a.printCities(a.getCities("country.Region = 'Caribbean'",-1));
-        System.out.println();
-
-        // Print all cities in a country from the largest population to smallest
-        System.out.println("All cities in a country (India) - Largest Population to Smallest:");
-        a.printCities(a.getCities("country.Name = 'India'",-1));
-        System.out.println();
-
-        // Print all cities in a continent from the largest population to smallest
-        System.out.println("All cities in a District (Punjab) - Largest Population to Smallest:");
-        a.printCities(a.getCities("city.District = 'Punjab'",-1));
-        System.out.println();
-
-        // Print top 5 cities in the world from the largest population to smallest
-        System.out.println("Top 5 cities in the world - Largest Population to Smallest:");
-        a.printCities(a.getCities("",5));
-        System.out.println();
-
-        // Print top 5 cities in a continent from the largest population to smallest
-        System.out.println("Top 5 cities in a continent (North America) - Largest Population to Smallest:");
-        a.printCities(a.getCities("country.Continent = 'North America'",5));
-        System.out.println();
-
-        // Print top 5 cities in a region from the largest population to smallest
-        System.out.println("Top 5 cities in a region (Caribbean) - Largest Population to Smallest:");
-        a.printCities(a.getCities("country.Region = 'Caribbean'",-1));
-        System.out.println();
-
-        // Print top 5 cities in a country from the largest population to smallest
-        System.out.println("Top 5 cities in a country (India) - Largest Population to Smallest:");
-        a.printCities(a.getCities("country.Name = 'India'",5));
-        System.out.println();
-
-        // Print top 5 cities in a continent from the largest population to smallest
-        System.out.println("Top 5 cities in a District (Punjab) - Largest Population to Smallest:");
-        a.printCities(a.getCities("city.District = 'Punjab'",5));
-        System.out.println();
-
-        // Print all capital cities in the world from the largest population to smallest
-        System.out.println("All capital cities in the world - Largest Population to Smallest:");
-        a.printCapitalCities(a.getCapitalCities("",-1));
-        System.out.println();
-
-        // Print all capital cities in a continent from the largest population to smallest
-        System.out.println("All capital cities in a continent (South America) - Largest Population to Smallest:");
-        a.printCapitalCities(a.getCapitalCities("country.Continent = 'South America'",-1));
-        System.out.println();
-
-        //Print all capital cities in a region from the largest population to smallest
-        System.out.println("All capital cities in a region (Eastern Asia) - Largest Population to Smallest:");
-        a.printCapitalCities(a.getCapitalCities("country.Region = 'Eastern Asia'",-1));
-        System.out.println();
-
-        // Print top N capital cities in the world from the largest population to smallest
-        System.out.println("All top 5 capital cities in the world - Largest Population to Smallest:");
-        a.printCapitalCities(a.getCapitalCities("",5));
-        System.out.println();
-
-        //Print top N capital cities a continent from the largest population to smallest
-        System.out.println("All top 5 capital cities in a continent (South America) - Largest Population to Smallest:");
-        a.printCapitalCities(a.getCapitalCities("country.Continent = 'South America'",5));
-        System.out.println();
-
-        //Print top N capital cities a region from the largest population to smallest
-        System.out.println("All top 5 capital cities in a region (Eastern Asia) - Largest Population to Smallest:");
-        a.printCapitalCities(a.getCapitalCities("country.Region = 'Eastern Asia'",5));
-        System.out.println();
+        // Prints Reports for Cities feature
+        Cities_Report.main(a);
+//
+//        // Prints Reports for Capital Cities feature
+//        Capital_Cities_Report.main(a);
 
         // Disconnect from database
         a.disconnect();
     }
+
     /**
      * Connection to MySQL database.
      */
@@ -256,6 +156,80 @@ public class App
         }
     }
 
+
+    /**
+     * Gets cities and population in the world.
+     * @return A list of cities and population, or null if there is an error.
+     */
+    public ArrayList<City> getCities(String clause, int top)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            String strSelect = "";
+            // Create string for SQL statement
+            if (clause.isEmpty() && top == -1){
+                strSelect =
+                        "SELECT city.Name, city.CountryCode, city.District, city.Population, country.Continent, country.Region, country.Name "
+                                + "FROM city, country "
+                                + "WHERE city.CountryCode = country.Code "
+                                + "ORDER BY city.Population DESC";
+            }
+
+            if (clause.isEmpty() && top != -1){
+                strSelect =
+                        "SELECT city.Name, city.CountryCode, city.District, city.Population, country.Continent, country.Region, country.Name "
+                                + "FROM city, country "
+                                + "WHERE city.CountryCode = country.Code "
+                                + "ORDER BY city.Population DESC "
+                                + "LIMIT " + top;
+            }
+
+            if(!clause.isEmpty() && top == -1) {
+                strSelect =
+                        "SELECT city.Name, city.CountryCode, city.District, city.Population, country.Continent, country.Region, country.Name "
+                                + "FROM city, country "
+                                + "WHERE city.CountryCode = country.Code AND " + clause
+                                + " ORDER BY city.Population DESC";
+            }
+
+            if(!clause.isEmpty() && top != -1) {
+                strSelect =
+                        "SELECT city.Name, city.CountryCode, city.District, city.Population, country.Continent, country.Region, country.Name "
+                                + "FROM city, country "
+                                + "WHERE city.CountryCode = country.Code AND " + clause
+                                + " ORDER BY city.Population DESC "
+                                + "LIMIT " + top;
+
+            }
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next())
+            {
+                City cit = new City();
+                cit.Name = rset.getString("city.Name");
+                cit.CountryCode = rset.getString("city.CountryCode");
+                cit.District = rset.getString("city.District");
+                cit.Population = rset.getInt("city.Population");
+                cit.Continent = rset.getString("country.Continent");
+                cit.Region = rset.getString("country.Region");
+                cit.Country = rset.getString("country.Name");
+                cities.add(cit);
+            }
+            return cities;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
     /**
      *  Gets all the current countries.
      *  @return A list of capital cities, or null if there is an error.
@@ -373,19 +347,47 @@ public class App
             return;
         }
         // Print header
-        System.out.println("------------------------------------------------------------------------------------------------------");
-        System.out.printf("%5s %15s %25s %25s %15s %10s", "ID", "NAME", "CONTINENT", "REGION", "POPULATION", "CAPITAL");
+        System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("%3s %45s %25s %35s %15s %20s", "ID", "NAME", "CONTINENT", "REGION", "POPULATION", "CAPITAL");
         System.out.println();
-        System.out.println("------------------------------------------------------------------------------------------------------");
+        System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------");
         // Loop over all countries in the list
         for (Country cnt : countries)
         {
             if (cnt == null)
                 continue;
             String emp_string =
-                    String.format("%3s %15s %25s %25s %15s %10s",
+                    String.format("%3s %45s %25s %35s %15s %20s",
                             cnt.countryID,cnt.name,cnt.continent,cnt.region,cnt.population,cnt.capital);
             System.out.println(emp_string);
+        }
+    }
+
+    /**
+     * Prints a list of cities.
+     * @param cities The list of cities to print.
+     */
+    public void printCities(ArrayList<City> cities)
+    {
+        if (cities == null)
+        {
+            System.out.println("No cities");
+            return;
+        }
+        // Print header
+        System.out.println("-------------------------------------------------------------------------------------------------");
+        System.out.printf("%-30s %-35s %-20s %-20s", "Name", "Country", "District", "Population");
+        System.out.println();
+        System.out.println("-------------------------------------------------------------------------------------------------");
+        // Loop over all cities in the list
+        for (City cit : cities)
+        {
+            if (cit == null)
+                continue;
+            String cit_string =
+                    String.format("%-30s %-35s %-20s %-20s",
+                            cit.Name, cit.Country, cit.District, cit.Population);
+            System.out.println(cit_string);
         }
     }
 
@@ -414,107 +416,6 @@ public class App
                     String.format("%20s %20s %20s",
                             cty.Name,cty.Country,cty.Population);
             System.out.println(emp_string);
-        }
-    }
-
-    /**
-     * Gets cities and population in the world.
-     * @return A list of cities and population, or null if there is an error.
-     */
-    public ArrayList<City> getCities(String clause, int top)
-    {
-        try
-        {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            String strSelect = "";
-            // Create string for SQL statement
-            if (clause.isEmpty() && top == -1){
-                strSelect =
-                        "SELECT city.Name, city.CountryCode, city.District, city.Population, country.Continent, country.Region, country.Name "
-                                + "FROM city, country "
-                                + "WHERE city.CountryCode = country.Code "
-                                + "ORDER BY city.Population DESC";
-            }
-
-            if (clause.isEmpty() && top != -1){
-                strSelect =
-                        "SELECT city.Name, city.CountryCode, city.District, city.Population, country.Continent, country.Region, country.Name "
-                                + "FROM city, country "
-                                + "WHERE city.CountryCode = country.Code "
-                                + "ORDER BY city.Population DESC "
-                                + "LIMIT " + top;
-            }
-
-            if(!clause.isEmpty() && top == -1) {
-                strSelect =
-                        "SELECT city.Name, city.CountryCode, city.District, city.Population, country.Continent, country.Region, country.Name "
-                                + "FROM city, country "
-                                + "WHERE city.CountryCode = country.Code AND " + clause
-                                + " ORDER BY city.Population DESC";
-            }
-
-            if(!clause.isEmpty() && top != -1) {
-                strSelect =
-                        "SELECT city.Name, city.CountryCode, city.District, city.Population, country.Continent, country.Region, country.Name "
-                                + "FROM city, country "
-                                + "WHERE city.CountryCode = country.Code AND " + clause
-                                + " ORDER BY city.Population DESC "
-                                + "LIMIT " + top;
-
-            }
-
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract city information
-            ArrayList<City> cities = new ArrayList<City>();
-            while (rset.next())
-            {
-                City cit = new City();
-                cit.Name = rset.getString("city.Name");
-                cit.CountryCode = rset.getString("city.CountryCode");
-                cit.District = rset.getString("city.District");
-                cit.Population = rset.getInt("city.Population");
-                cit.Continent = rset.getString("country.Continent");
-                cit.Region = rset.getString("country.Region");
-                cit.Country = rset.getString("country.Name");
-                cities.add(cit);
-            }
-            return cities;
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get city details");
-            return null;
-        }
-    }
-
-    /**
-     * Prints a list of cities.
-     * @param cities The list of cities to print.
-     */
-    public void printCities(ArrayList<City> cities)
-    {
-        if (cities == null)
-        {
-            System.out.println("No cities");
-            return;
-        }
-        // Print header
-        System.out.println("-------------------------------------------------------------------------------------------------");
-        System.out.printf("%-25s %-30s %-20s %-15s", "Name", "Country", "District", "Population");
-        System.out.println();
-        System.out.println("-------------------------------------------------------------------------------------------------");
-        // Loop over all cities in the list
-        for (City cit : cities)
-        {
-            if (cit == null)
-                continue;
-            String cit_string =
-                    String.format("%-25s %-30s %-20s %-15s",
-                            cit.Name, cit.Country, cit.District, cit.Population);
-            System.out.println(cit_string);
         }
     }
 
