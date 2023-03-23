@@ -17,11 +17,11 @@ public class App
             a.connect(args[0], Integer.parseInt(args[1]));
         }
 
-//        // Prints Reports for Countries feature
-//        Country_Report.main(a);
+        // Prints Reports for Countries feature
+        Country_Report.main(a);
 
-        // Prints Reports for Cities feature
-        Cities_Report.main(a);
+//        // Prints Reports for Cities feature
+//        Cities_Report.main(a);
 //
 //        // Prints Reports for Capital Cities feature
 //        Capital_Cities_Report.main(a);
@@ -88,7 +88,9 @@ public class App
     }
 
     /**
-     *  Gets all the current countries.
+     *  Gets all countries based on clause and top params.
+     *  @param clause Where clause for SQL statement
+     *  @param top Number to limit results in SQL statement
      *  @return A list of all countries, or null if there is an error.
      */
     public ArrayList<Country> getCountries(String clause, int top)
@@ -101,31 +103,35 @@ public class App
             // Create string for SQL statement
             if (clause.isEmpty() && top == -1){
                 strSelect =
-                        "SELECT Code, Name, Continent, Region, Population, Capital "
-                                + "FROM country "
+                        "SELECT country.Code, country.Name, country.Continent, country.Region, country.Population, city.Name "
+                                + "FROM country, city "
+                                + "WHERE country.Capital = city.ID "
                                 + "ORDER BY Population DESC";
             }
 
             if (clause.isEmpty() && top != -1){
                 strSelect =
-                        "SELECT Code, Name, Continent, Region, Population, Capital "
-                                + "FROM country "
+                        "SELECT country.Code, country.Name, country.Continent, country.Region, country.Population, city.Name "
+                                + "FROM country, city "
+                                + "WHERE country.Capital = city.ID "
                                 + "ORDER BY Population DESC "
                                 + "LIMIT " + top;
             }
 
             if(!clause.isEmpty() && top == -1) {
                 strSelect =
-                        "SELECT Code, Name, Continent, Region, Population, Capital "
-                                + "FROM country "
+                        "SELECT country.Code, country.Name, country.Continent, country.Region, country.Population, city.Name "
+                                + "FROM country, city "
+                                + "WHERE country.Capital = city.ID AND "
                                 + clause
                                 + " ORDER BY Population DESC";
             }
 
             if(!clause.isEmpty() && top != -1) {
                 strSelect =
-                        "SELECT Code, Name, Continent, Region, Population, Capital "
-                                + "FROM country "
+                        "SELECT country.Code, country.Name, country.Continent, country.Region, country.Population, city.Name "
+                                + "FROM country, city "
+                                + "WHERE country.Capital = city.ID AND "
                                 + clause
                                 + " ORDER BY Population DESC "
                                 + "LIMIT " + top;
@@ -138,12 +144,12 @@ public class App
             while (rset.next())
             {
                 Country country = new Country();
-                country.countryID = rset.getString("Code");
-                country.name = rset.getString("Name");
-                country.continent = rset.getString("Continent");
-                country.region = rset.getString("Region");
-                country.population = rset.getInt("Population");
-                country.capital = getCapital(rset.getInt("Capital"));
+                country.countryID = rset.getString("country.Code");
+                country.name = rset.getString("country.Name");
+                country.continent = rset.getString("country.Continent");
+                country.region = rset.getString("country.Region");
+                country.population = rset.getInt("country.Population");
+                country.capital = rset.getString("city.Name");
                 countries.add(country);
             }
             return countries;
@@ -159,7 +165,9 @@ public class App
 
     /**
      * Gets cities and population in the world.
-     * @return A list of cities and population, or null if there is an error.
+     * @param clause Where clause for SQL statement
+     * @param top Number to limit results in SQL statement
+     * @return A list of cities, or null if there is an error.
      */
     public ArrayList<City> getCities(String clause, int top)
     {
@@ -232,6 +240,8 @@ public class App
 
     /**
      *  Gets all the current countries.
+     *  @param clause Where clause for SQL statement
+     *  @param top Number to limit results in SQL statement
      *  @return A list of capital cities, or null if there is an error.
      */
     public ArrayList<City> getCapitalCities(String clause, int top)
@@ -375,10 +385,10 @@ public class App
             return;
         }
         // Print header
-        System.out.println("-------------------------------------------------------------------------------------------------");
-        System.out.printf("%-30s %-35s %-20s %-20s", "Name", "Country", "District", "Population");
+        System.out.println("---------------------------------------------------------------------------------------------------");
+        System.out.printf("%-30s %-35s %-20s %-20s", "NAME", "COUNTRY", "DISTRICT", "POPULATION");
         System.out.println();
-        System.out.println("-------------------------------------------------------------------------------------------------");
+        System.out.println("---------------------------------------------------------------------------------------------------");
         // Loop over all cities in the list
         for (City cit : cities)
         {
@@ -403,17 +413,17 @@ public class App
             return;
         }
         // Print header
-        System.out.println("-------------------------------------------------------------------------------------------------");
-        System.out.printf("%20s %20s %20s", "NAME", "COUNTRY", "POPULATION");
+        System.out.println("--------------------------------------------------------------------------------");
+        System.out.printf("%-25s %-40s %-30s", "NAME", "COUNTRY", "POPULATION");
         System.out.println();
-        System.out.println("-------------------------------------------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------------------");
         // Loop over all cities in the list
         for (City cty : cities)
         {
             if (cty == null)
                 continue;
             String emp_string =
-                    String.format("%20s %20s %20s",
+                    String.format("%-25s %-40s %-30s",
                             cty.Name,cty.Country,cty.Population);
             System.out.println(emp_string);
         }
