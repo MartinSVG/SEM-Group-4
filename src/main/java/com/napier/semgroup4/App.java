@@ -20,20 +20,22 @@ public class App
         // Prints Reports for Countries feature
         Country_Report.main(a);
 
-//        // Prints Reports for Cities feature
-//        Cities_Report.main(a);
-//
-//        // Prints Reports for Capital Cities feature
-//        Capital_Cities_Report.main(a);
+        // Prints Reports for Cities feature
+        Cities_Report.main(a);
+
+        // Prints Reports for Capital Cities feature
+        Capital_Cities_Report.main(a);
 
         // Disconnect from database
         a.disconnect();
     }
 
+
     /**
      * Connection to MySQL database.
      */
     private Connection con = null;
+
 
     /**
      * Connect to the MySQL database.
@@ -68,6 +70,7 @@ public class App
         }
     }
 
+
     /**
      * Disconnect from the MySQL database.
      */
@@ -86,6 +89,7 @@ public class App
             }
         }
     }
+
 
     /**
      *  Gets all countries based on clause and top params.
@@ -238,6 +242,7 @@ public class App
         }
     }
 
+
     /**
      *  Gets all the current countries.
      *  @param clause Where clause for SQL statement
@@ -312,38 +317,6 @@ public class App
         }
     }
 
-    /**
-     * Prints the name of the Capital City
-     * @param ID The ID of the capital
-     */
-    public String getCapital(int ID)
-    {
-        try
-        {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT Name "
-                            + "FROM city "
-                            + "WHERE ID = " + ID;
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-
-            if (rset.next())
-            {
-                return rset.getString("Name");
-            }
-            else
-                return null;
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get city name");
-            return null;
-        }
-    }
 
     /**
      * Prints the countries retrieved from the database
@@ -373,6 +346,7 @@ public class App
         }
     }
 
+
     /**
      * Prints a list of cities.
      * @param cities The list of cities to print.
@@ -400,6 +374,7 @@ public class App
             System.out.println(cit_string);
         }
     }
+
 
     /**
      * Prints the cities retrieved from the database
