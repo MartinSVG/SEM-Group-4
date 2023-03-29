@@ -1,6 +1,9 @@
-name: A workflow for Group 4 SEM App
-on: push
-
+name: A workflow for my Hello World App
+on:
+  push:
+    branches:
+      - master
+      - lab08
 jobs:
   UnitTests:
     name: Unit Tests
@@ -16,7 +19,7 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       - name: Unit Tests
-        run: mvn -Dtest=com.napier.semgroup4.AppTest test
+        run: mvn -Dtest=com.napier.sem.AppTest test
 
   IntegrationTests:
     name: Integration Tests
@@ -34,20 +37,20 @@ jobs:
       - name: Integration Tests and CodeCov
         run: |
           docker build -t database ./db 
-          docker run --name world -dp 33060:3306 database
-          mvn -Dtest=com.napier.semgroup4.AppIntegrationTest test
-          docker stop world
-          docker rm world
+          docker run --name employees -dp 33060:3306 database
+          mvn -Dtest=com.napier.sem.AppIntegrationTest test          
+          docker stop employees
+          docker rm employees
           docker image rm database
       - name: CodeCov
         uses: codecov/codecov-action@v2
         with:
+          # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
           directory: ./target/site/jacoco
-          flags: Integration Tests
-          verbose: true
-
+          flags: Integration Tests # optional
+          verbose: true # optional (default = false)
   build:
-    name: Group 4 SEM - Build and Start Using docker-compose
+    name: Build and Start Using docker-compose
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
@@ -63,3 +66,4 @@ jobs:
         run: |
           mvn package -DskipTests
           docker-compose up --abort-on-container-exit
+
