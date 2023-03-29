@@ -8,8 +8,8 @@ public class Capital_Cities_Report {
         System.out.println();
 
         // Print all capital cities in a continent from the largest population to smallest
-        System.out.println("All capital cities in a continent (South America) - Largest Population to Smallest:");
-        a.printCapitalCities(a.getCapitalCities("country.Continent = 'South America'",-1));
+        System.out.println("All capital cities in a continent (North America) - Largest Population to Smallest:");
+        a.printCapitalCities(a.getCapitalCities("country.Continent = 'North America'",-1));
         System.out.println();
 
         //Print all capital cities in a region from the largest population to smallest
