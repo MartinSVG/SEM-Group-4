@@ -23,8 +23,8 @@ public class App
         System.out.println();
 
         // Print all countries in a continent from the largest population to smallest
-        System.out.println("All countries in a continent (North America) - Largest Population to Smallest:");
-        a.printCountries(a.getCountries("WHERE Continent = North America'",-1));
+        System.out.println("All countries in a continent South America) - Largest Population to Smallest:");
+        a.printCountries(a.getCountries("WHERE Continent = South America'",-1));
         System.out.println();
 
         //Print all countries in a region from the largest population to smallest
