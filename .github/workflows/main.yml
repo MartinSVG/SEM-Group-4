@@ -43,7 +43,7 @@ jobs:
         uses: codecov/codecov-action@v2
         with:
           directory: ./target/site/jacoco
-          flags: Integration Tests
+          flags: Integration-Tests
           verbose: true
 
   build:
