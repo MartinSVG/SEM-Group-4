@@ -42,12 +42,13 @@ jobs:
       - name: CodeCov
         uses: codecov/codecov-action@v2
         with:
+          token: ${{secrets.CODECOV}}
           directory: ./target/site/jacoco
-          flags: Integration Tests
+          flags: Integration-Tests
           verbose: true
 
   build:
-    name: Group 4 SEM - Build and Start Using docker-compose
+    name: Group 4 SEM - Build Run in Docker and Deploy Release
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
@@ -63,3 +64,10 @@ jobs:
         run: |
           mvn package -DskipTests
           docker-compose up --abort-on-container-exit
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          automatic_release_tag: "latest"
+          files: |
+            ./target/*.jar
