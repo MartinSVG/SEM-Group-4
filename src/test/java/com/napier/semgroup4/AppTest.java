@@ -86,4 +86,10 @@ public class AppTest {
         cities.add(cty);
         app.printCapitalCities(cities);
     }
+
+    @Test
+    void testWorldPopulation(){
+        int population = app.getWorldPopulation();
+        app.printWorldPopulation(population);
+    }
 }

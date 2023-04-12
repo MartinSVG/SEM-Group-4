@@ -166,6 +166,40 @@ public class App
         }
     }
 
+    public int getWorldPopulation(){
+        try{
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            String strSelect = "SELECT SUM(Population) AS population FROM country";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            return rset.getInt("population");
+        }        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get world population");
+            return -1;
+        }
+    }
+
+    public void printWorldPopulation(int population){
+        if (population == -1)
+        {
+            System.out.println("Failed to get world population");
+            return;
+        }
+        // Print header
+        System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("%25s", "WORLD POPULATION");
+        System.out.println();
+        System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------");
+        String popString =
+                String.format("%25s",
+                        population);
+        System.out.println(popString);
+    }
+
 
     /**
      * Gets cities and population in the world.
