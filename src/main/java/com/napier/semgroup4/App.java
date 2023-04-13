@@ -28,7 +28,8 @@ public class App
 //        // Prints Reports for Capital Cities feature
 //        Capital_Cities_Report.main(a);
 
-        a.printPopulation(a.getPopulation("Country","Saint Vincent and the Grenadines"));
+        //Prints Reports for Population of the World, a Continent, Region, Country, District, and City
+        Individual_Population_Report.main(a);
 
         // Disconnect from database
         a.disconnect();
@@ -170,6 +171,12 @@ public class App
         }
     }
 
+    /**
+     *  Gets population of different subgroups of the world
+     *  @param type Defines what type of report is to be generated. eg (City or Continent)
+     *  @param name Name of Continent, City, etc.
+     *  @return A list with type, name, and total population
+     */
     public ArrayList<String> getPopulation(String type, String name){
         try{
             // Create an SQL statement
@@ -233,13 +240,13 @@ public class App
         }
         // Print header
         System.out.println("------------------------------------");
-        System.out.printf("%10s", "Population of " + result.get(1) + " " + result.get(0));
+        System.out.printf("%3s", "Population of " + result.get(1) + " " + result.get(0));
         System.out.println();
         System.out.println("------------------------------------");
         NumberFormat nf= NumberFormat.getInstance();
         nf.setMaximumFractionDigits(0);
         String popString =
-                String.format("%10s",
+                String.format("%3s",
                         nf.format(Double.parseDouble(result.get(2))));
         System.out.println(popString);
     }
@@ -417,10 +424,10 @@ public class App
         {
             if (cnt == null)
                 continue;
-            String emp_string =
+            String resString =
                     String.format("%3s %45s %25s %35s %15s %20s",
                             cnt.countryID,cnt.name,cnt.continent,cnt.region,cnt.population,cnt.capital);
-            System.out.println(emp_string);
+            System.out.println(resString);
         }
     }
 
@@ -475,10 +482,10 @@ public class App
         {
             if (cty == null)
                 continue;
-            String emp_string =
+            String resString =
                     String.format("%-25s %-40s %-30s",
                             cty.Name,cty.Country,cty.Population);
-            System.out.println(emp_string);
+            System.out.println(resString);
         }
     }
 
