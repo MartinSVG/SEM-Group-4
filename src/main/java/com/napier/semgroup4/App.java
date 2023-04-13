@@ -1,6 +1,7 @@
 package com.napier.semgroup4;
 
 import java.sql.*;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.math.BigInteger;
 
@@ -27,7 +28,7 @@ public class App
 //        // Prints Reports for Capital Cities feature
 //        Capital_Cities_Report.main(a);
 
-        a.printWorldPopulation(a.getWorldPopulation());
+        a.printPopulation(a.getPopulation("Country","Saint Vincent and the Grenadines"));
 
         // Disconnect from database
         a.disconnect();
@@ -169,11 +170,41 @@ public class App
         }
     }
 
-    public String getWorldPopulation(){
+    public ArrayList<String> getPopulation(String type, String name){
         try{
             // Create an SQL statement
             Statement stmt = con.createStatement();
-            String strSelect = "SELECT SUM(Population) FROM country";
+            String strSelect = "";
+
+            if(type.isEmpty()){
+                strSelect = "SELECT SUM(Population) FROM country";
+                name = "The World";
+            }
+
+            if(type == "Continent"){
+                strSelect = "SELECT SUM(Population) From country WHERE country.Continent = '" + name +"'";
+                type = "(Continent)";
+            }
+
+            if(type == "Region"){
+                strSelect = "SELECT SUM(Population) From country WHERE country.Region = '" + name +"'";
+                type = "(Region)";
+            }
+
+            if(type == "Country"){
+                strSelect = "SELECT SUM(Population) From country WHERE country.Name = '" + name +"'";
+                type = "(Country)";
+            }
+
+            if(type == "District"){
+                strSelect = "SELECT SUM(Population) From city WHERE city.District = '" + name +"'";
+                type = "(District)";
+            }
+
+            if(type == "City"){
+                strSelect = "SELECT SUM(Population) From city WHERE city.Name = '" + name +"'";
+                type = "(City)";
+            }
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             String population = "";
@@ -181,29 +212,35 @@ public class App
                 population = rset.getBigDecimal(1).toBigInteger().toString();
 
             }
-            return population;
+            ArrayList<String> res = new ArrayList<String>();
+            res.add(type);
+            res.add(name);
+            res.add(population);
+            return res;
         }catch (Exception e)
         {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get world population");
-            return "";
+            System.out.println("Failed to get population");
+            return null;
         }
     }
 
-    public void printWorldPopulation(String population){
-        if (population == "")
+    public void printPopulation(ArrayList<String> result){
+        if (result == null)
         {
-            System.out.println("Failed to get world population");
+            System.out.println("Failed to get population");
             return;
         }
         // Print header
-        System.out.println("-------------------");
-        System.out.printf("%10s", "WORLD POPULATION");
+        System.out.println("------------------------------------");
+        System.out.printf("%10s", "Population of " + result.get(1) + " " + result.get(0));
         System.out.println();
-        System.out.println("-------------------");
+        System.out.println("------------------------------------");
+        NumberFormat nf= NumberFormat.getInstance();
+        nf.setMaximumFractionDigits(0);
         String popString =
                 String.format("%10s",
-                        population);
+                        nf.format(Double.parseDouble(result.get(2))));
         System.out.println(popString);
     }
 
