@@ -2,6 +2,7 @@ package com.napier.semgroup4;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.math.BigInteger;
 
 public class App
 {
@@ -17,14 +18,16 @@ public class App
             a.connect(args[0], Integer.parseInt(args[1]));
         }
 
-        // Prints Reports for Countries feature
-        Country_Report.main(a);
+//        // Prints Reports for Countries feature
+//        Country_Report.main(a);
+//
+//        // Prints Reports for Cities feature
+//        Cities_Report.main(a);
+//
+//        // Prints Reports for Capital Cities feature
+//        Capital_Cities_Report.main(a);
 
-        // Prints Reports for Cities feature
-        Cities_Report.main(a);
-
-        // Prints Reports for Capital Cities feature
-        Capital_Cities_Report.main(a);
+        a.printWorldPopulation(a.getWorldPopulation());
 
         // Disconnect from database
         a.disconnect();
@@ -166,36 +169,40 @@ public class App
         }
     }
 
-    public int getWorldPopulation(){
+    public String getWorldPopulation(){
         try{
             // Create an SQL statement
             Statement stmt = con.createStatement();
-            String strSelect = "SELECT SUM(Population) AS population FROM country";
+            String strSelect = "SELECT SUM(Population) FROM country";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
+            String population = "";
+            while (rset.next()) {               // Position the cursor                 3
+                population = rset.getBigDecimal(1).toBigInteger().toString();
 
-            return rset.getInt("population");
-        }        catch (Exception e)
+            }
+            return population;
+        }catch (Exception e)
         {
             System.out.println(e.getMessage());
             System.out.println("Failed to get world population");
-            return -1;
+            return "";
         }
     }
 
-    public void printWorldPopulation(int population){
-        if (population == -1)
+    public void printWorldPopulation(String population){
+        if (population == "")
         {
             System.out.println("Failed to get world population");
             return;
         }
         // Print header
-        System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------");
-        System.out.printf("%25s", "WORLD POPULATION");
+        System.out.println("-------------------");
+        System.out.printf("%10s", "WORLD POPULATION");
         System.out.println();
-        System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("-------------------");
         String popString =
-                String.format("%25s",
+                String.format("%10s",
                         population);
         System.out.println(popString);
     }

@@ -89,7 +89,7 @@ public class AppTest {
 
     @Test
     void testWorldPopulation(){
-        int population = app.getWorldPopulation();
+        String population = app.getWorldPopulation();
         app.printWorldPopulation(population);
     }
 }
