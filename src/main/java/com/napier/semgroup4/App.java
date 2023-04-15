@@ -3,7 +3,6 @@ package com.napier.semgroup4;
 import java.sql.*;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.math.BigInteger;
 
 public class App
 {
@@ -19,14 +18,14 @@ public class App
             a.connect(args[0], Integer.parseInt(args[1]));
         }
 
-//        // Prints Reports for Countries feature
-//        Country_Report.main(a);
-//
-//        // Prints Reports for Cities feature
-//        Cities_Report.main(a);
-//
-//        // Prints Reports for Capital Cities feature
-//        Capital_Cities_Report.main(a);
+        // Prints Reports for Countries feature
+        Country_Report.main(a);
+
+        // Prints Reports for Cities feature
+        Cities_Report.main(a);
+
+        // Prints Reports for Capital Cities feature
+        Capital_Cities_Report.main(a);
 
         //Prints Reports for Population of the World, a Continent, Region, Country, District, and City
         Individual_Population_Report.main(a);
@@ -175,7 +174,7 @@ public class App
      *  Gets population of different subgroups of the world
      *  @param type Defines what type of report is to be generated. eg (City or Continent)
      *  @param name Name of Continent, City, etc.
-     *  @return A list with type, name, and total population
+     *  @return A list with type, name, and total population, or null if there is an error.
      */
     public ArrayList<String> getPopulation(String type, String name){
         try{
@@ -232,6 +231,10 @@ public class App
         }
     }
 
+    /**
+     * Prints the countries retrieved from the database
+     *  @param result The list of variables to print
+     */
     public void printPopulation(ArrayList<String> result){
         if (result == null)
         {
@@ -463,7 +466,7 @@ public class App
 
     /**
      * Prints the cities retrieved from the database
-     *  @param cities The list of countries to print.
+     *  @param cities The list of capital cities to print.
      */
     public void printCapitalCities(ArrayList<City> cities)
     {
