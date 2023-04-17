@@ -23,7 +23,7 @@ public class Cities_Report {
         a.printCities(a.getCities("country.Name = 'India'",-1));
         System.out.println();
 
-        // Print all cities in a continent from the largest population to smallest
+        // Print all cities in a district from the largest population to smallest
         System.out.println("All cities in a District (Punjab) - Largest Population to Smallest:");
         a.printCities(a.getCities("city.District = 'Punjab'",-1));
         System.out.println();

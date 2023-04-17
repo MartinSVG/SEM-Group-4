@@ -13,13 +13,13 @@ public class App
 
         // Connect to database
         if(args.length < 1){
-            a.connect("localhost:33060", 30000);
+            a.connect("localhost:33060", 0);
         }else{
             a.connect(args[0], Integer.parseInt(args[1]));
         }
 
         // Prints Reports for Countries feature
-        Country_Report.main(a);
+      /*  Country_Report.main(a);
 
         // Prints Reports for Cities feature
         Cities_Report.main(a);
@@ -28,7 +28,10 @@ public class App
         Capital_Cities_Report.main(a);
 
         //Prints Reports for Population of the World, a Continent, Region, Country, District, and City
-        Individual_Population_Report.main(a);
+        Individual_Population_Report.main(a); */
+
+        //Prints Reports for Population of people living in and out of cities
+        In_and_Out_of_Cities_Report.main(a);
 
         // Disconnect from database
         a.disconnect();
@@ -380,6 +383,7 @@ public class App
 
             }
 
+
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
 
@@ -404,8 +408,61 @@ public class App
             return null;
         }
     }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public ArrayList<String> getInAndOutofCities(String type, String name)
+    {
+        try{
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            String strSelect = "";
 
 
+            if(type == "Continent"){
+                strSelect = "SELECT SUM(city.Population) "
+                                 + "From city, country "
+                                 + "WHERE city.CountryCode = country.Code AND country.Continent = '" + name
+                                 + "'";
+                type = "(Continent)";
+            }
+
+            if(type == "Region"){
+                strSelect = "SELECT SUM(city.Population) "
+                        + "From city, country "
+                        + "WHERE city.CountryCode = country.Code AND country.Region = '" + name
+                        + "'";
+                type = "(Region)";
+            }
+
+            if(type == "Country"){
+                strSelect = "SELECT SUM(city.Population) "
+                        + "From city, country "
+                        + "WHERE city.CountryCode = country.Code AND country.Name = '" + name
+                        + "'";
+                type = "(Country)";
+            }
+
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            String population = "";
+            while (rset.next()) {               // Position the cursor                 3
+                population = rset.getBigDecimal(1).toBigInteger().toString();
+
+            }
+            ArrayList<String> res = new ArrayList<String>();
+            res.add(type);
+            res.add(name);
+            res.add(population);
+            return res;
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population");
+            return null;
+        }
+    }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /**
      * Prints the countries retrieved from the database
      *  @param countries The list of countries to print.
@@ -490,6 +547,25 @@ public class App
                             cty.Name,cty.Country,cty.Population);
             System.out.println(resString);
         }
+    }
+
+    public void printInandOutofCities(ArrayList<String> result){
+        if (result == null)
+        {
+            System.out.println("Failed to get population");
+            return;
+        }
+        // Print header
+        System.out.println("------------------------------------");
+        System.out.printf("%3s", "Population of people living in the cities of " + result.get(1) + " " + result.get(0));
+        System.out.println();
+        System.out.println("------------------------------------");
+        NumberFormat nf= NumberFormat.getInstance();
+        nf.setMaximumFractionDigits(0);
+        String popString =
+                String.format("%3s",
+                        nf.format(Double.parseDouble(result.get(2))));
+        System.out.println(popString);
     }
 
 }
