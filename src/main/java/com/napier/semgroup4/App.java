@@ -408,53 +408,116 @@ public class App
             return null;
         }
     }
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     *  Gets population of people living in and out of cities in a contient, region and country
+     *  @param type Defines what type of report is to be generated. eg (City or Continent)
+     *  @param name Name of Continent, City, etc.
+     *  @return A list with type, name, and total population, or null if there is an error.
+     */
+
     public ArrayList<String> getInAndOutofCities(String type, String name)
     {
         try{
             // Create an SQL statement
+            Statement ruralstmt = con.createStatement();
+            Statement urbanstmt = con.createStatement();
             Statement stmt = con.createStatement();
+            String ruralQuery = "";
+            String urbanQuery = "";
             String strSelect = "";
 
+            if(type.equals("Continent")){
 
-            if(type == "Continent"){
-                strSelect = "SELECT SUM(city.Population) "
-                                 + "From city, country "
-                                 + "WHERE city.CountryCode = country.Code AND country.Continent = '" + name
-                                 + "'";
+                ruralQuery = "SELECT "
+                        + "(SELECT SUM(Population) FROM country WHERE Continent = '" + name + "') "
+                        + "- (SELECT SUM(city.Population) FROM city, country WHERE city.CountryCode = country.Code AND country.Continent = '" + name + "') "
+                        + "AS RuralPopulation";
+
+                urbanQuery = "SELECT "
+                        + " (SELECT SUM(city.Population) FROM city, country WHERE city.CountryCode = country.Code AND country.Continent = '" + name + "') "
+                        + "AS UrbanPopulation";
+
+                strSelect = "SELECT SUM(Population) From country WHERE country.Continent = '" + name +"'";
+
                 type = "(Continent)";
             }
 
-            if(type == "Region"){
-                strSelect = "SELECT SUM(city.Population) "
-                        + "From city, country "
-                        + "WHERE city.CountryCode = country.Code AND country.Region = '" + name
-                        + "'";
+            if(type.equals("Region")){
+                ruralQuery = "SELECT "
+                        + "(SELECT SUM(Population) FROM country WHERE Region = '" + name + "') "
+                        + "- (SELECT SUM(city.Population) FROM city, country WHERE city.CountryCode = country.Code AND country.Region = '" + name + "') "
+                        + "AS RuralPopulation";
+
+                urbanQuery = "SELECT "
+                        + " (SELECT SUM(city.Population) FROM city, country WHERE city.CountryCode = country.Code AND country.Region = '" + name + "') "
+                        + "AS UrbanPopulation";
+
+                strSelect = "SELECT SUM(Population) From country WHERE country.Region = '" + name +"'";
                 type = "(Region)";
             }
 
-            if(type == "Country"){
-                strSelect = "SELECT SUM(city.Population) "
-                        + "From city, country "
-                        + "WHERE city.CountryCode = country.Code AND country.Name = '" + name
-                        + "'";
+            if(type.equals("Country")){
+                ruralQuery = "SELECT "
+                        + "(SELECT SUM(Population) FROM country WHERE Name = '" + name + "') "
+                        + "- (SELECT SUM(city.Population) FROM city, country WHERE city.CountryCode = country.Code AND country.Name = '" + name + "') "
+                        + "AS RuralPopulation";
+
+                urbanQuery = "SELECT "
+                        + " (SELECT SUM(city.Population) FROM city, country WHERE city.CountryCode = country.Code AND country.Name = '" + name + "') "
+                        + "AS UrbanPopulation";
+
+                strSelect = "SELECT SUM(Population) From country WHERE country.Name = '" + name +"'";
                 type = "(Country)";
             }
 
 
-            // Execute SQL statement
+
+            // Execute SQL statement for each kind of result
+            ResultSet ruralset = ruralstmt.executeQuery(ruralQuery);
+            String ruralPopulation = "";
+            while (ruralset.next()) {
+                 ruralPopulation = ruralset.getBigDecimal("RuralPopulation").toBigInteger().toString();
+
+            }
+            ruralset.close();
+
+            ResultSet urbanset = urbanstmt.executeQuery(urbanQuery);
+            String urbanPopulation = "";
+            while (urbanset.next()) {
+                urbanPopulation = urbanset.getBigDecimal("UrbanPopulation").toBigInteger().toString();
+
+            }
+            urbanset.close();
+
             ResultSet rset = stmt.executeQuery(strSelect);
             String population = "";
             while (rset.next()) {               // Position the cursor                 3
                 population = rset.getBigDecimal(1).toBigInteger().toString();
 
             }
+            rset.close();
+
+            // Print Population Summary, Total, Urban and Rural
+            System.out.println("---------------------------------------------------------------------------------------");
+            System.out.printf("%3s", "                  POPULATION SUMMMARY FOR " + name + " " + type);
+            System.out.println();
+            System.out.println("---------------------------------------------------------------------------------------");
+
+            System.out.println("Total population: " + population);
+            System.out.println("Urban population: " + urbanPopulation);
+            System.out.println("Rural population: " + ruralPopulation);
+
+
             ArrayList<String> res = new ArrayList<String>();
             res.add(type);
             res.add(name);
             res.add(population);
+            res.add(urbanPopulation);
+            res.add(ruralPopulation);
+
             return res;
-        }catch (Exception e)
+        } catch (Exception e)
         {
             System.out.println(e.getMessage());
             System.out.println("Failed to get population");
@@ -462,7 +525,7 @@ public class App
         }
     }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     /**
      * Prints the countries retrieved from the database
      *  @param countries The list of countries to print.
@@ -555,17 +618,33 @@ public class App
             System.out.println("Failed to get population");
             return;
         }
-        // Print header
+
+        // Print URBAN population
         System.out.println("------------------------------------");
-        System.out.printf("%3s", "Population of people living in the cities of " + result.get(1) + " " + result.get(0));
+        System.out.printf("%3s", "URBAN POPULATION: Population of people living in the cities of " + result.get(1) + " " + result.get(0));
         System.out.println();
         System.out.println("------------------------------------");
-        NumberFormat nf= NumberFormat.getInstance();
-        nf.setMaximumFractionDigits(0);
-        String popString =
+        NumberFormat urbanNf= NumberFormat.getInstance();
+        urbanNf.setMaximumFractionDigits(0);
+        String popUrban =
                 String.format("%3s",
-                        nf.format(Double.parseDouble(result.get(2))));
-        System.out.println(popString);
+                        urbanNf.format(Double.parseDouble(result.get(3))));
+        System.out.println(popUrban);
+        System.out.println();
+
+        // Print RURAL population
+        System.out.println("------------------------------------");
+        System.out.printf("%3s", "RURAL POPULATION: Population of people living out of cities in " + result.get(1) + " " + result.get(0));
+        System.out.println();
+        System.out.println("------------------------------------");
+        NumberFormat ruralNf= NumberFormat.getInstance();
+        ruralNf.setMaximumFractionDigits(0);
+        String popRural =
+                String.format("%3s",
+                        ruralNf.format(Double.parseDouble(result.get(4))));
+        System.out.println(popRural);
+        System.out.println();
+
     }
 
 }
