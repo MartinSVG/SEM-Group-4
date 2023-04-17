@@ -7,10 +7,10 @@ public class In_and_Out_of_Cities_Report {
         // Prints the population of people living in cities in the continent of North America
         a.printInandOutofCities(a.getInAndOutofCities("Continent","North America"));
 
-        // Prints the population of people living in cities in the continent of North America
+        // Prints the population of people living in cities in the region of the Caribbean
         a.printInandOutofCities(a.getInAndOutofCities("Region","Caribbean"));
 
-        // Prints the population of people living in cities in the continent of North America
+        // Prints the population of people living in cities in the country of Barbados
         a.printInandOutofCities(a.getInAndOutofCities("Country","Barbados"));
 
     }
