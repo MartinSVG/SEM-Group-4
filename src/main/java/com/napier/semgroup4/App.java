@@ -502,6 +502,10 @@ public class App
             double urbanPercentage = Double.parseDouble(urbanPopulation) / Double.parseDouble(population) * 100;
             double ruralPercentage = Double.parseDouble(ruralPopulation) / Double.parseDouble(population) * 100;
 
+            String urbanPercent = String.valueOf(urbanPercentage);
+            String ruralPercent = String.valueOf(ruralPercentage);
+
+
             // Print Population Summary, Total, Urban and Rural
             System.out.println("---------------------------------------------------------------------------------------");
             System.out.printf("%3s", "                  POPULATION SUMMMARY FOR " + name + " " + type);
@@ -519,6 +523,8 @@ public class App
             res.add(population);
             res.add(urbanPopulation);
             res.add(ruralPopulation);
+            res.add(urbanPercent);
+            res.add(ruralPercent);
 
 
 
@@ -635,7 +641,15 @@ public class App
         String popUrban =
                 String.format("%3s",
                         urbanNf.format(Double.parseDouble(result.get(3))));
+
+        urbanNf.setMaximumFractionDigits(2);
+        String percentUrban =
+                String.format("%3s",
+                        urbanNf.format(Double.parseDouble(result.get(5))));
+
         System.out.println(popUrban);
+        System.out.println();
+        System.out.printf(percentUrban + " of Total Population");
         System.out.println();
 
         // Print RURAL population
@@ -648,7 +662,15 @@ public class App
         String popRural =
                 String.format("%3s",
                         ruralNf.format(Double.parseDouble(result.get(4))));
+
+        urbanNf.setMaximumFractionDigits(2);
+        String percentRural =
+                String.format("%3s",
+                        urbanNf.format(Double.parseDouble(result.get(6))));
+
         System.out.println(popRural);
+        System.out.println();
+        System.out.printf(percentRural + " of Total Population");
         System.out.println();
 
     }
