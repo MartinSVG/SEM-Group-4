@@ -439,7 +439,7 @@ public class App
      * Prints a list of cities.
      * @param cities The list of cities to print.
      */
-    public static void printCities(ArrayList<City> cities)
+    public void printCities(ArrayList<City> cities)
     {
         if (cities == null)
         {
