@@ -13,7 +13,7 @@ public class App
 
         // Connect to database
         if(args.length < 1){
-            a.connect("localhost:33060", 0);
+            a.connect("localhost:33060", 30000);
         }else{
             a.connect(args[0], Integer.parseInt(args[1]));
         }
@@ -413,10 +413,9 @@ public class App
      *  Gets population of people living in and out of cities in a contient, region and country
      *  @param type Defines what type of report is to be generated. eg (City or Continent)
      *  @param name Name of Continent, City, etc.
-     *  @return A list with type, name, and total population, or null if there is an error.
      */
 
-    public ArrayList<String> getInAndOutofCities(String type, String name)
+    public void getInAndOutOfCities(String type, String name)
     {
         try{
             // Create an SQL statement
@@ -509,32 +508,23 @@ public class App
 
             // Print Population Summary, Total, Urban and Rural
             System.out.println("---------------------------------------------------------------------------------------");
-            System.out.printf("%3s", "                  POPULATION SUMMMARY FOR " + name + " " + type);
+            System.out.printf("%3s", "                  Population Summary for " + name + " " + type);
             System.out.println();
             System.out.println("---------------------------------------------------------------------------------------");
 
+            NumberFormat nf= NumberFormat.getInstance();
+            nf.setMaximumFractionDigits(0);
+            urbanPopulation = nf.format(Double.parseDouble(urbanPopulation));
+            ruralPopulation = nf.format(Double.parseDouble(ruralPopulation));
+            population = nf.format(Double.parseDouble(population));
             System.out.println("Total population: " + population);
             System.out.printf("Urban population: %s (%.2f%%)\n", urbanPopulation, urbanPercentage);
             System.out.printf("Rural population: %s (%.2f%%)\n", ruralPopulation, ruralPercentage);
 
-
-            ArrayList<String> res = new ArrayList<String>();
-            res.add(type);
-            res.add(name);
-            res.add(population);
-            res.add(urbanPopulation);
-            res.add(ruralPopulation);
-            res.add(urbanPercent);
-            res.add(ruralPercent);
-
-
-
-            return res;
         } catch (Exception e)
         {
             System.out.println(e.getMessage());
             System.out.println("Failed to get population");
-            return null;
         }
     }
 
