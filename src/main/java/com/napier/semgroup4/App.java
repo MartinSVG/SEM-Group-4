@@ -19,7 +19,7 @@ public class App
         }
 
         // Prints Reports for Countries feature
-      /*  Country_Report.main(a);
+        Country_Report.main(a);
 
         // Prints Reports for Cities feature
         Cities_Report.main(a);
@@ -28,7 +28,7 @@ public class App
         Capital_Cities_Report.main(a);
 
         //Prints Reports for Population of the World, a Continent, Region, Country, District, and City
-        Individual_Population_Report.main(a); */
+        Individual_Population_Report.main(a);
 
         //Prints Reports for Population of people living in and out of cities
         In_and_Out_of_Cities_Report.main(a);
