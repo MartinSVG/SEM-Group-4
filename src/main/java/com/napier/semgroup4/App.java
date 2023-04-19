@@ -498,6 +498,10 @@ public class App
             }
             rset.close();
 
+            // Calculate percentage of urban and rural population to total population
+            double urbanPercentage = Double.parseDouble(urbanPopulation) / Double.parseDouble(population) * 100;
+            double ruralPercentage = Double.parseDouble(ruralPopulation) / Double.parseDouble(population) * 100;
+
             // Print Population Summary, Total, Urban and Rural
             System.out.println("---------------------------------------------------------------------------------------");
             System.out.printf("%3s", "                  POPULATION SUMMMARY FOR " + name + " " + type);
@@ -505,8 +509,8 @@ public class App
             System.out.println("---------------------------------------------------------------------------------------");
 
             System.out.println("Total population: " + population);
-            System.out.println("Urban population: " + urbanPopulation);
-            System.out.println("Rural population: " + ruralPopulation);
+            System.out.printf("Urban population: %s (%.2f%%)\n", urbanPopulation, urbanPercentage);
+            System.out.printf("Rural population: %s (%.2f%%)\n", ruralPopulation, ruralPercentage);
 
 
             ArrayList<String> res = new ArrayList<String>();
@@ -515,6 +519,8 @@ public class App
             res.add(population);
             res.add(urbanPopulation);
             res.add(ruralPopulation);
+
+
 
             return res;
         } catch (Exception e)
@@ -621,7 +627,7 @@ public class App
 
         // Print URBAN population
         System.out.println("------------------------------------");
-        System.out.printf("%3s", "URBAN POPULATION: Population of people living in the cities of " + result.get(1) + " " + result.get(0));
+        System.out.printf("%3s", "URBAN POPULATION: The Total Population of " + result.get(1) + " " + result.get(0) + " living in the cities");
         System.out.println();
         System.out.println("------------------------------------");
         NumberFormat urbanNf= NumberFormat.getInstance();
@@ -634,7 +640,7 @@ public class App
 
         // Print RURAL population
         System.out.println("------------------------------------");
-        System.out.printf("%3s", "RURAL POPULATION: Population of people living out of cities in " + result.get(1) + " " + result.get(0));
+        System.out.printf("%3s", "RURAL POPULATION: The Total Population of " + result.get(1) + " " + result.get(0) + " not living in cities ");
         System.out.println();
         System.out.println("------------------------------------");
         NumberFormat ruralNf= NumberFormat.getInstance();
