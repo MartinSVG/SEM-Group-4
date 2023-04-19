@@ -502,7 +502,7 @@ public class App
             double urbanPercentage = Double.parseDouble(urbanPopulation) / Double.parseDouble(population) * 100;
             double ruralPercentage = Double.parseDouble(ruralPopulation) / Double.parseDouble(population) * 100;
 
-
+            // Added percentage to string variable to be added in detail output
             String urbanPercent = String.format("%.2f%%", urbanPercentage);
             String ruralPercent = String.format("%.2f%%", ruralPercentage);
 
@@ -632,7 +632,7 @@ public class App
             return;
         }
 
-        // Print URBAN population
+        // Print detail URBAN population
         System.out.println("------------------------------------");
         System.out.printf("%3s", "URBAN POPULATION: The Total Population of " + result.get(1) + " " + result.get(0) + " living in the cities");
         System.out.println();
@@ -648,7 +648,7 @@ public class App
         System.out.println(result.get(5) + " of Total Population");
         System.out.println();
 
-        // Print RURAL population
+        // Print detial RURAL population
         System.out.println("------------------------------------");
         System.out.printf("%3s", "RURAL POPULATION: The Total Population of " + result.get(1) + " " + result.get(0) + " not living in cities ");
         System.out.println();
