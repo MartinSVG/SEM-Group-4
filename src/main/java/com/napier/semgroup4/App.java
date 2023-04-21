@@ -3,6 +3,7 @@ package com.napier.semgroup4;
 import java.sql.*;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.sql.Connection;
 
 public class App
 {
@@ -18,7 +19,7 @@ public class App
             a.connect(args[0], Integer.parseInt(args[1]));
         }
         {
-        language_population_report.reportLanguagePopulation(args);
+            language_population_report.reportLanguagePopulation(args);
     }
 
         // Prints Reports for Countries feature
