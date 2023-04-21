@@ -17,6 +17,9 @@ public class App
         }else{
             a.connect(args[0], Integer.parseInt(args[1]));
         }
+        {
+        language_population_report.reportLanguagePopulation(args);
+    }
 
         // Prints Reports for Countries feature
         Country_Report.main(a);
@@ -32,6 +35,9 @@ public class App
 
         //Prints Reports for Population of people living in and out of cities
         In_and_Out_of_Cities_Report.main(a);
+
+        // Prints Reports for Population of language speakers
+        language_population_report.main(a);
 
         // Disconnect from database
         a.disconnect();
@@ -69,7 +75,7 @@ public class App
                 System.out.println("Successfully connected");
                 break;
             } catch (SQLException sqle) {
-                System.out.println("Failed to connect to database attempt " + Integer.toString(i));
+                System.out.println("Failed to connect to database attempt ");
                 System.out.println(sqle.getMessage());
             } catch (InterruptedException ie) {
                 System.out.println("Thread interrupted? Should not happen.");
@@ -151,7 +157,7 @@ public class App
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
 
-            ArrayList<Country> countries = new ArrayList<Country>();
+            ArrayList<Country> countries = new ArrayList<>();
             while (rset.next())
             {
                 Country country = new Country();

@@ -9,6 +9,9 @@ public class language_population_report {
         languageStats.printLanguageStats();
     }
 
+    public static void main(App a) {
+    }
+
     public static class LanguageStats {
         private final ArrayList<Language> languages = new ArrayList<>();
 
