@@ -43,4 +43,16 @@ public class AppIntegrationTest
     void testGetAllCapitalCitiesInTheWorld(){
 
     }
+
+    // All Capital Cities in a continent
+    @Test
+    void testGetAllCapitalCitiesInAContinent(){
+
+    }
+
+    // All Capital Cities in a region
+    @Test
+    void testGetAllCapitalCitiesInARegion(){
+
+    }
 }
