@@ -57,6 +57,8 @@ public class AppIntegrationTest
     // All Capital Cities in a region
     @Test
     void testGetAllCapitalCitiesInARegion(){
-
+        ArrayList<City> cities = new ArrayList<City>();
+        cities = app.getCapitalCities("country.Region = 'Caribbean'",-1);
+        assertNotNull(cities);
     }
 }
