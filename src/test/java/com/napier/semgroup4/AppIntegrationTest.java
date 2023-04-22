@@ -41,7 +41,9 @@ public class AppIntegrationTest
     // All Capital Cities in the world
     @Test
     void testGetAllCapitalCitiesInTheWorld(){
-
+        ArrayList<City> cities = new ArrayList<City>();
+        cities = app.getCapitalCities("",-1);
+        assertNotNull(cities);
     }
 
     // All Capital Cities in a continent
