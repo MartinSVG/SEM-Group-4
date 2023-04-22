@@ -35,4 +35,8 @@ public class AppIntegrationTest
         cities = app.getCapitalCities("",5);
         assertEquals(cities.size(),5);
     }
+
+    /* Integration Tests for Capital Cities Feature */
+
+    // All Capital Cities in the world
 }
