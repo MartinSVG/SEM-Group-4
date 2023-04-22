@@ -39,4 +39,8 @@ public class AppIntegrationTest
     /* Integration Tests for Capital Cities Feature */
 
     // All Capital Cities in the world
+    @Test
+    void testGetAllCapitalCitiesInTheWorld(){
+
+    }
 }
