@@ -49,7 +49,9 @@ public class AppIntegrationTest
     // All Capital Cities in a continent
     @Test
     void testGetAllCapitalCitiesInAContinent(){
-
+        ArrayList<City> cities = new ArrayList<City>();
+        cities = app.getCapitalCities("country.Continent = 'North America'",-1);
+        assertNotNull(cities);
     }
 
     // All Capital Cities in a region
