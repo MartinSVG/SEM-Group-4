@@ -125,4 +125,10 @@ public class AppTest {
     }
 
     //Unit tests for 'Get specific population' feature
+    @Test
+    void printPopulationTestNull()
+    {
+        app.printPopulation(null);
+    }
+
 }
