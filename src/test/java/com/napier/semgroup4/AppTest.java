@@ -123,4 +123,6 @@ public class AppTest {
         cities.add(cty);
         app.printCapitalCities(cities);
     }
+
+    //Unit tests for 'Get specific population' feature
 }
