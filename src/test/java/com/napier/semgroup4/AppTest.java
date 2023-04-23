@@ -51,6 +51,43 @@ public class AppTest {
     }
 
     @Test
+    void printCitiesTestNull()
+    {
+        app.printCities(null);
+    }
+
+    @Test
+    void printCitiesTestEmpty()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        app.printCities(cities);
+    }
+
+    @Test
+    void printCitiesTestContainsNull()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        cities.add(null);
+        app.printCities(cities);
+    }
+
+    @Test
+    void printCitiesWithoutError()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        City cty = new City();
+        cty.Name = "Los Angeles";
+        cty.CountryCode = "USA";
+        cty.Country = "United States";
+        cty.District = "California";
+        cty.Population = 3694820;
+        cty.Region = "North America";
+        cty.Continent = "North America";
+        cities.add(cty);
+        app.printCities(cities);
+    }
+
+    @Test
     void printCapitalCitiesTestNull()
     {
         app.printCapitalCities(null);
@@ -86,10 +123,4 @@ public class AppTest {
         cities.add(cty);
         app.printCapitalCities(cities);
     }
-
-//    @Test
-//    void testWorldPopulation(){
-//        ArrayList<String> result = app.getWorldPopulation();
-//        app.printWorldPopulation(population);
-//    }
 }
