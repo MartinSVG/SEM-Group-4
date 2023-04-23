@@ -131,4 +131,11 @@ public class AppTest {
         app.printPopulation(null);
     }
 
+    @Test
+    void printPopulationTestEmpty()
+    {
+        ArrayList<String> population = new ArrayList<String>();
+        app.printPopulation(population);
+    }
+
 }
