@@ -114,4 +114,30 @@ public class AppIntegrationTest
         cities = app.getCapitalCities("",5);
         assertEquals(5, cities.size());
     }
+
+    /* Integration Tests for Capital Cities Feature */
+
+    // All Capital Cities in the world
+    @Test
+    void testGetAllCapitalCitiesInTheWorld(){
+        ArrayList<City> cities = new ArrayList<City>();
+        cities = app.getCapitalCities("",-1);
+        assertNotNull(cities);
+    }
+
+    // All Capital Cities in a continent
+    @Test
+    void testGetAllCapitalCitiesInAContinent(){
+        ArrayList<City> cities = new ArrayList<City>();
+        cities = app.getCapitalCities("country.Continent = 'North America'",-1);
+        assertNotNull(cities);
+    }
+
+    // All Capital Cities in a region
+    @Test
+    void testGetAllCapitalCitiesInARegion(){
+        ArrayList<City> cities = new ArrayList<City>();
+        cities = app.getCapitalCities("country.Region = 'Caribbean'",-1);
+        assertNotNull(cities);
+    }
 }
