@@ -98,23 +98,6 @@ public class AppIntegrationTest
         assertEquals(5, cities.size());
     }
 
-    /* Integration Tests for Countries Feature */
-    @Test
-    void testTopFivePopulatedCountriesInTheWorld()
-    {
-        ArrayList<Country> countries = new ArrayList<Country>();
-        countries = app.getCountries("",5);
-        assertEquals(5, countries.size());
-    }
-
-    @Test
-    void testTopFivePopulatedCapitalCitiesInTheWorld()
-    {
-        ArrayList<City> cities = new ArrayList<City>();
-        cities = app.getCapitalCities("",5);
-        assertEquals(5, cities.size());
-    }
-
     /* Integration Tests for Capital Cities Feature */
 
     // All Capital Cities in the world
@@ -140,4 +123,23 @@ public class AppIntegrationTest
         cities = app.getCapitalCities("country.Region = 'Caribbean'",-1);
         assertNotNull(cities);
     }
+
+    /* Integration Tests for Countries Feature */
+    @Test
+    void testTopFivePopulatedCountriesInTheWorld()
+    {
+        ArrayList<Country> countries = new ArrayList<Country>();
+        countries = app.getCountries("",5);
+        assertEquals(5, countries.size());
+    }
+
+    @Test
+    void testTopFivePopulatedCapitalCitiesInTheWorld()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        cities = app.getCapitalCities("",5);
+        assertEquals(5, cities.size());
+    }
+
+
 }
