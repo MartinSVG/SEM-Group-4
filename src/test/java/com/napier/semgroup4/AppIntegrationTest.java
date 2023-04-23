@@ -125,6 +125,8 @@ public class AppIntegrationTest
     }
 
     /* Integration Tests for Countries Feature */
+
+    // Top 5 Populated Countries in the World
     @Test
     void testTopFivePopulatedCountriesInTheWorld()
     {
@@ -133,6 +135,7 @@ public class AppIntegrationTest
         assertEquals(5, countries.size());
     }
 
+    // Top 5 Populated Cities in the World
     @Test
     void testTopFivePopulatedCapitalCitiesInTheWorld()
     {
