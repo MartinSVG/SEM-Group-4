@@ -130,6 +130,12 @@ public class AppTest {
     {
         app.printPopulation(null);
     }
+    @Test
+    void printPopulationTestEmpty()
+    {
+        ArrayList<String> result = new ArrayList<String>();
+        app.printPopulation(result);
+    }
 
 
 }
