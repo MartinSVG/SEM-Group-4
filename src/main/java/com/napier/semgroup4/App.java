@@ -629,8 +629,8 @@ public class App
         System.out.println();
         System.out.println("---------------------------------------------------------------------------------------");
         System.out.println("Total population: " + result.get(2));
-        System.out.printf("Urban population: %s %s\n", result.get(3), result.get(4));
-        System.out.printf("Rural population: %s %s\n", result.get(5), result.get(6));
+        System.out.printf("Urban population: %s (%s)\n", result.get(3), result.get(4));
+        System.out.printf("Rural population: %s (%s)\n", result.get(5), result.get(6));
 
     }
 
