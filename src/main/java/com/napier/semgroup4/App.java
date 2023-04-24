@@ -618,7 +618,7 @@ public class App
     }
 
     public void printInAndOutOfCities(ArrayList<String> result){
-        if (result == null || result.contains(null))
+        if (result == null || result.contains(null) || result.isEmpty())
         {
             System.out.println("Failed to get population");
             return;
