@@ -185,9 +185,9 @@ public class AppTest {
     void printPopulationWithoutError()
     {
         ArrayList<String> result = new ArrayList<String>();
-        result.add ("Continent");
+        result.add("Continent");
         result.add("North America");
-        result.add("482,993,000");
+        result.add("482993000");
         app.printPopulation(result);
     }
 }
