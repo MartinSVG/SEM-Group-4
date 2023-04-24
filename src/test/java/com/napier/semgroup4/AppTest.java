@@ -138,4 +138,11 @@ public class AppTest {
         app.printPopulation(population);
     }
 
+    @Test
+    void printPopulationTestContainsNull()
+    {
+        ArrayList<String> population = new ArrayList<String>();
+        population.add(null);
+        app.printPopulation(population);
+    }
 }
