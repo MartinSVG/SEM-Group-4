@@ -144,5 +144,9 @@ public class AppTest {
         res.add(null);
         app.printPopulation(null);
     }
-
+    @Test
+    void printPopulationWithoutError()
+    {
+        app.printPopulation(app.getPopulation("Continent","North America"));
+    }
 }
