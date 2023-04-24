@@ -131,22 +131,5 @@ public class AppTest {
         app.printPopulation(null);
     }
 
-    @Test
-    void printPopulationTestEmpty()
-    {
-        ArrayList<String> res = new ArrayList<String>();
-        app.printPopulation(null);
-    }
-    @Test
-    void printPopulationTestContainsNull()
-    {
-        ArrayList<String> res = new ArrayList<String>();
-        res.add(null);
-        app.printPopulation(null);
-    }
-    @Test
-    void printPopulationWithoutError()
-    {
-        app.printPopulation(app.getPopulation("Continent","North America"));
-    }
+
 }

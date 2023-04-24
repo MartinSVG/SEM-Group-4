@@ -239,7 +239,7 @@ public class App
      *  @param result The list of variables to print
      */
     public void printPopulation(ArrayList<String> result){
-        if (result == null)
+        if (result == null || result.contains(null) || result.isEmpty())
         {
             System.out.println("Failed to get population");
             return;
