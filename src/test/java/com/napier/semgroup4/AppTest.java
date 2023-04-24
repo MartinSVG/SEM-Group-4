@@ -144,4 +144,13 @@ public class AppTest {
         app.printPopulation(result);
     }
 
+    @Test
+    void printPopulationWithoutError()
+    {
+        ArrayList<String> result = new ArrayList<String>();
+        result.add ("Continent");
+        result.add("North America");
+        result.add("482993000");
+        app.printPopulation(result);
+    }
 }
