@@ -160,4 +160,34 @@ public class AppTest {
         result.add("97.75%");
         app.printInAndOutOfCities(result);
     }
+
+    //Unit tests for 'Get specific population' feature
+    @Test
+    void printPopulationTestNull()
+    {
+        app.printPopulation(null);
+    }
+    @Test
+    void printPopulationTestEmpty()
+    {
+        ArrayList<String> result = new ArrayList<String>();
+        app.printPopulation(result);
+    }
+    @Test
+    void printPopulationTestContainsNull()
+    {
+        ArrayList<String> result = new ArrayList<String>();
+        result.add(null);
+        app.printPopulation(result);
+    }
+
+    @Test
+    void printPopulationWithoutError()
+    {
+        ArrayList<String> result = new ArrayList<String>();
+        result.add ("Continent");
+        result.add("North America");
+        result.add("482,993,000");
+        app.printPopulation(result);
+    }
 }
