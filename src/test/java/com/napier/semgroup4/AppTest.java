@@ -124,33 +124,40 @@ public class AppTest {
         app.printCapitalCities(cities);
     }
 
-    //Unit tests for 'Get specific population' feature
+    // Unit Tests for In and Out of Cities Feature
+
     @Test
-    void printPopulationTestNull()
+    void printInAndOutOfCitiesTestNull()
     {
-        app.printPopulation(null);
-    }
-    @Test
-    void printPopulationTestEmpty()
-    {
-        ArrayList<String> result = new ArrayList<String>();
-        app.printPopulation(result);
-    }
-    @Test
-    void printPopulationTestContainsNull()
-    {
-        ArrayList<String> result = new ArrayList<String>();
-        result.add(null);
-        app.printPopulation(result);
+        app.printInAndOutOfCities(null);
     }
 
     @Test
-    void printPopulationWithoutError()
+    void printInAndOutOfCitiesTestEmpty()
     {
         ArrayList<String> result = new ArrayList<String>();
-        result.add ("Continent");
-        result.add("North America");
-        result.add("482993000");
-        app.printPopulation(result);
+        app.printInAndOutOfCities(result);
+    }
+
+    @Test
+    void printInAndOutOfCitiesTestContainsNull()
+    {
+        ArrayList<String> result = new ArrayList<String>();
+        result.add(null);
+        app.printInAndOutOfCities(result);
+    }
+
+    @Test
+    void printInAndOutOfCitiesWithoutError()
+    {
+        ArrayList<String> result = new ArrayList<String>();
+        result.add("Barbados");
+        result.add("Country");
+        result.add("270,000");
+        result.add("6,070");
+        result.add("2.25%");
+        result.add("263,930");
+        result.add("97.75%");
+        app.printInAndOutOfCities(result);
     }
 }
