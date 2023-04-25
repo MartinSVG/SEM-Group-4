@@ -35,7 +35,7 @@ public class LanguagePopulationReport {
 
                 // Create a prepared statement to retrieve data for Chinese, English, Hindi, Spanish, and Arabic
                 PreparedStatement statement = connection.prepareStatement(
-                        "SELECT Language, Percentage, Percentage * population/100 as population FROM countrylanguage WHERE Language IN (?, ?, ?, ?, ?)");
+                        "SELECT Language, Percentage, Percentage * Population/100 as population FROM countrylanguage WHERE Language IN (?, ?, ?, ?, ?)");
                 for (int i = 0; i < languageNames.length; i++) {
                     statement.setString(i + 1, languageNames[i]);
                 }
