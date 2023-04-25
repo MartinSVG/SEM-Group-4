@@ -145,7 +145,7 @@ public class AppIntegrationTest
     }
 
 
-    /* Integration Tests for Specific Population Feature */
+    /* Integration Tests for Specific Population Features */
 
     // Population of the world
     @Test
