@@ -36,7 +36,7 @@ public class language_population_report {
                     statement.setString(i + 1, languageNames[i]);
                 }
 
-                // Execute the query and retrieve the results
+                // Execute the query and retrieve results
                 ResultSet resultSet = statement.executeQuery();
 
                 // Populate the Language objects with the retrieved data
