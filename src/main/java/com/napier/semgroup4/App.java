@@ -239,7 +239,7 @@ public class App
      *  @param result The list of variables to print
      */
     public void printPopulation(ArrayList<String> result){
-        if (result == null)
+        if (result == null || result.contains(null) || result.isEmpty())
         {
             System.out.println("Failed to get population");
             return;
@@ -415,7 +415,7 @@ public class App
      *  @param name Name of Continent, City, etc.
      */
 
-    public void getInAndOutOfCities(String type, String name)
+    public ArrayList<String> getInAndOutOfCities(String type, String name)
     {
         try{
             // Create an SQL statement
@@ -504,27 +504,29 @@ public class App
             // Added percentage to string variable to be added in detail output
             String urbanPercent = String.format("%.2f%%", urbanPercentage);
             String ruralPercent = String.format("%.2f%%", ruralPercentage);
-
-
-            // Print Population Summary, Total, Urban and Rural
-            System.out.println("---------------------------------------------------------------------------------------");
-            System.out.printf("%3s", "                  Population Summary for " + name + " " + type);
-            System.out.println();
-            System.out.println("---------------------------------------------------------------------------------------");
-
             NumberFormat nf= NumberFormat.getInstance();
             nf.setMaximumFractionDigits(0);
             urbanPopulation = nf.format(Double.parseDouble(urbanPopulation));
             ruralPopulation = nf.format(Double.parseDouble(ruralPopulation));
             population = nf.format(Double.parseDouble(population));
-            System.out.println("Total population: " + population);
-            System.out.printf("Urban population: %s (%.2f%%)\n", urbanPopulation, urbanPercentage);
-            System.out.printf("Rural population: %s (%.2f%%)\n", ruralPopulation, ruralPercentage);
+
+            ArrayList<String> result = new ArrayList<String>();
+            result.add(name);
+            result.add(type);
+            result.add(population);
+            result.add(urbanPopulation);
+            result.add(urbanPercent);
+            result.add(ruralPopulation);
+            result.add(ruralPercent);
+
+            return result;
+
 
         } catch (Exception e)
         {
             System.out.println(e.getMessage());
             System.out.println("Failed to get population");
+            return null;
         }
     }
 
@@ -615,45 +617,20 @@ public class App
         }
     }
 
-    public void printInandOutofCities(ArrayList<String> result){
-        if (result == null)
+    public void printInAndOutOfCities(ArrayList<String> result){
+        if (result == null || result.contains(null) || result.isEmpty())
         {
             System.out.println("Failed to get population");
             return;
         }
-
-        // Print detail URBAN population
-        System.out.println("------------------------------------");
-        System.out.printf("%3s", "URBAN POPULATION: The Total Population of " + result.get(1) + " " + result.get(0) + " living in the cities");
+        // Print Population Summary, Total, Urban and Rural
+        System.out.println("---------------------------------------------------------------------------------------");
+        System.out.printf("%3s", "                  Population Summary for " + result.get(0) + " " + result.get(1));
         System.out.println();
-        System.out.println("------------------------------------");
-        NumberFormat urbanNf= NumberFormat.getInstance();
-        urbanNf.setMaximumFractionDigits(0);
-        String popUrban =
-                String.format("%3s",
-                        urbanNf.format(Double.parseDouble(result.get(3))));
-
-        System.out.println(popUrban);
-        System.out.println();
-        System.out.println(result.get(5) + " of Total Population");
-        System.out.println();
-
-        // Print detial RURAL population
-        System.out.println("------------------------------------");
-        System.out.printf("%3s", "RURAL POPULATION: The Total Population of " + result.get(1) + " " + result.get(0) + " not living in cities ");
-        System.out.println();
-        System.out.println("------------------------------------");
-        NumberFormat ruralNf= NumberFormat.getInstance();
-        ruralNf.setMaximumFractionDigits(0);
-        String popRural =
-                String.format("%3s",
-                        ruralNf.format(Double.parseDouble(result.get(4))));
-
-        System.out.println(popRural);
-        System.out.println();
-        System.out.println(result.get(6) + " of Total Population");
-        System.out.println();
-
+        System.out.println("---------------------------------------------------------------------------------------");
+        System.out.println("Total population: " + result.get(2));
+        System.out.printf("Urban population: %s (%s)\n", result.get(3), result.get(4));
+        System.out.printf("Rural population: %s (%s)\n", result.get(5), result.get(6));
 
     }
 

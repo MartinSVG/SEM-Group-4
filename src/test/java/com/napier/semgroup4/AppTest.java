@@ -123,4 +123,71 @@ public class AppTest {
         cities.add(cty);
         app.printCapitalCities(cities);
     }
+
+    // Unit Tests for In and Out of Cities Feature
+
+    @Test
+    void printInAndOutOfCitiesTestNull()
+    {
+        app.printInAndOutOfCities(null);
+    }
+
+    @Test
+    void printInAndOutOfCitiesTestEmpty()
+    {
+        ArrayList<String> result = new ArrayList<String>();
+        app.printInAndOutOfCities(result);
+    }
+
+    @Test
+    void printInAndOutOfCitiesTestContainsNull()
+    {
+        ArrayList<String> result = new ArrayList<String>();
+        result.add(null);
+        app.printInAndOutOfCities(result);
+    }
+
+    @Test
+    void printInAndOutOfCitiesWithoutError()
+    {
+        ArrayList<String> result = new ArrayList<String>();
+        result.add("Barbados");
+        result.add("Country");
+        result.add("270,000");
+        result.add("6,070");
+        result.add("2.25%");
+        result.add("263,930");
+        result.add("97.75%");
+        app.printInAndOutOfCities(result);
+    }
+
+    //Unit tests for 'Get specific population' feature
+    @Test
+    void printPopulationTestNull()
+    {
+        app.printPopulation(null);
+    }
+    @Test
+    void printPopulationTestEmpty()
+    {
+        ArrayList<String> result = new ArrayList<String>();
+        app.printPopulation(result);
+    }
+    @Test
+    void printPopulationTestContainsNull()
+    {
+        ArrayList<String> result = new ArrayList<String>();
+        result.add(null);
+        app.printPopulation(result);
+    }
+
+    @Test
+    void printPopulationWithoutError()
+    {
+        ArrayList<String> result = new ArrayList<String>();
+        result.add("Continent");
+        result.add("North America");
+        result.add("482993000");
+        app.printPopulation(result);
+    }
 }

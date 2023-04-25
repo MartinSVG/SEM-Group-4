@@ -145,4 +145,54 @@ public class AppIntegrationTest
     }
 
 
+    /* Integration Tests for Specific Population Features */
+
+    // Population of the world
+    @Test
+    void testGetPopulationOfTheWorld(){
+        ArrayList<String> population = new ArrayList<String>();
+        population = app.getPopulation("","");
+        assertNotNull(population);
+    }
+
+    // Population of a continent
+    @Test
+    void testGetPopulationOfAContinent() {
+        ArrayList<String> population = new ArrayList<String>();
+        population = app.getPopulation("Continent","North America");
+        assertNotNull(population);
+    }
+
+    // Population of a region
+    @Test
+    void testGetPopulationOfARegion(){
+        ArrayList<String> population = new ArrayList<String>();
+        population = app.getPopulation("Region","Caribbean");
+        assertNotNull(population);
+    }
+
+    // Population of a country
+    @Test
+    void testGetPopulationOfACountry(){
+        ArrayList<String> population = new ArrayList<String>();
+        population = app.getPopulation("Country","Barbados");
+        assertNotNull(population);
+    }
+
+    // Population of a district
+    @Test
+    void testGetPopulationOfADistrict(){
+        ArrayList<String> population = new ArrayList<String>();
+        population = app.getPopulation("District","Gujarat");
+        assertNotNull(population);
+    }
+
+    // Population of a city
+    @Test
+    void testGetPopulationOfACity(){
+        ArrayList<String> population = new ArrayList<String>();
+        population = app.getPopulation("City","Austin");
+        assertNotNull(population);
+    }
 }
+
