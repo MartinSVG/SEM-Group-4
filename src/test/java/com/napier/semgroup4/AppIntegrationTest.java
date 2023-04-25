@@ -147,5 +147,13 @@ public class AppIntegrationTest
 
     /* Integration Tests for Specific Population Feature */
 
+    // Population of the world
+    @Test
+    void testGetPopulationOfTheWorld(){
+        ArrayList<String> population = new ArrayList<String>();
+        population = app.getPopulation("","");
+        assertNotNull(population);
+    }
+
 }
 
