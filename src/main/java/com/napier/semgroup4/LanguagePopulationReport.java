@@ -35,7 +35,7 @@ public class LanguagePopulationReport {
 
                 // Create a prepared statement to retrieve data for Chinese, English, Hindi, Spanish, and Arabic
                 PreparedStatement statement = connection.prepareStatement(
-                        "SELECT Language, Percentage, percent_of_world_population FROM countrylanguage WHERE language_name IN (?, ?, ?, ?, ?)");
+                        "SELECT Language, Percentage, Percentage * population/100 as population FROM countrylanguage WHERE Language IN (?, ?, ?, ?, ?)");
                 for (int i = 0; i < languageNames.length; i++) {
                     statement.setString(i + 1, languageNames[i]);
                 }
@@ -45,9 +45,10 @@ public class LanguagePopulationReport {
 
                 // Populate the Language objects with the retrieved data
                 while (resultSet.next()) {
-                    String languageName = resultSet.getString("Language");
-                    double population = resultSet.getDouble("Population");
+                    String Language = resultSet.getString("Language");
+                    double population = resultSet.getDouble("population");
                     double percentOfWorldPop = resultSet.getDouble("Percentage");
+                    languages.add(new Language(Language, population, percentOfWorldPop));
                 }
             } catch (SQLException e) {
                 System.out.println("Error populating language stats from database.");
