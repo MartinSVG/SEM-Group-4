@@ -18,7 +18,9 @@ public class App {
         }
 
         // Populates and Prints Reports for Population of language speakers
-        language_population_report.main(args);
+        language_population_report.LanguageStats languageStats = new language_population_report.LanguageStats();
+        languageStats.populateLanguageStats(a.con);
+        languageStats.printLanguageStats();
 
         // Prints Reports for the Countries feature
         Country_Report.main(a);

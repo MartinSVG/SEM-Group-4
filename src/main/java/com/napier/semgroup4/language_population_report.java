@@ -27,6 +27,12 @@ public class language_population_report {
 
         public void populateLanguageStats(Connection connection) {
             try {
+                // Check if connection is null
+                if (connection == null) {
+                    System.out.println("Error: connection is null.");
+                    return;
+                }
+
                 // Create a prepared statement to retrieve data for Chinese, English, Hindi, Spanish, and Arabic
                 PreparedStatement statement = connection.prepareStatement(
                         "SELECT language_name, population, percent_of_world_pop FROM languages WHERE language_name IN (?, ?, ?, ?, ?)");
