@@ -10,7 +10,7 @@ import java.util.List;
 
 public class language_population_report {
 
-    public static void main(App args) {
+    public static void main(String[] args) {
         LanguageStats languageStats = new LanguageStats();
         // pass in the Connection object
         languageStats.populateLanguageStats(null);
@@ -25,9 +25,6 @@ public class language_population_report {
         private final String[] languageNames = {"Chinese", "English", "Hindi", "Spanish", "Arabic"};
         private final List<Language> languages = new ArrayList<>();
 
-        /**
-         * Populates the language statistics from the database for Chinese, English, Hindi, Spanish, and Arabic.
-         */
         public void populateLanguageStats(Connection connection) {
             try {
                 // Create a prepared statement to retrieve data for Chinese, English, Hindi, Spanish, and Arabic
@@ -53,9 +50,6 @@ public class language_population_report {
             }
         }
 
-        /**
-         * Prints the population statistics for Chinese, English, Hindi, Spanish, and Arabic.
-         */
         public void printLanguageStats() {
             // Sort the languages in descending order of population
             languages.sort(Comparator.comparing(Language::getPopulation).reversed());
@@ -68,7 +62,7 @@ public class language_population_report {
             // Print the language statistics
             for (Language language : languages) {
                 System.out.printf("%-15s %-15.0f %-15.2f%%\n", language.getName(), language.getPopulation(),
-                        language.getPercentOfWorldPop());
+                        language.getPercentOfWorldPopulation());
             }
 
             // Print the footer

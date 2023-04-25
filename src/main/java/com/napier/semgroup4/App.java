@@ -5,22 +5,20 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.sql.Connection;
 
-public class App
-{
-    public static void main(String[] args)
-    {
+public class App {
+    public static void main(String[] args) {
         // Create new Application
         App a = new App();
 
         // Connect to the database
-        if(args.length < 1){
+        if (args.length < 1) {
             a.connect("localhost:33060", 30000);
-        }else{
+        } else {
             a.connect(args[0], Integer.parseInt(args[1]));
         }
-        {
-            language_population_report.reportLanguagePopulation(args);
-    }
+
+        // Populates and Prints Reports for Population of language speakers
+        language_population_report.main(args);
 
         // Prints Reports for the Countries feature
         Country_Report.main(a);
@@ -37,19 +35,14 @@ public class App
         //Prints Reports for the Population of people living in and out of cities
         In_and_Out_of_Cities_Report.main(a);
 
-        // Prints Reports for Population of language speakers
-        language_population_report.main(a);
-
         // Disconnect from database
         a.disconnect();
     }
-
 
     /**
      * Connection to MySQL database.
      */
     private Connection con = null;
-
 
     /**
      * Connect to the MySQL database.
