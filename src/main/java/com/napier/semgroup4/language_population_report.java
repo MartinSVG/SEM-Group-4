@@ -10,9 +10,10 @@ import java.util.List;
 
 public class language_population_report {
 
-    public static void main(App ignoredArgs) {
+    public static void main(App args) {
         LanguageStats languageStats = new LanguageStats();
-        languageStats.populateLanguageStats(/* pass in the Connection object */);
+        // pass in the Connection object
+        languageStats.populateLanguageStats(null);
         languageStats.printLanguageStats();
     }
 
@@ -57,79 +58,68 @@ public class language_population_report {
          */
         public void printLanguageStats() {
             // Sort the languages in descending order of population
-            languages.sort(Comparator.comparing((Language language1) -> {
-                return language1.getPopulation();
-            }).reversed());
+            languages.sort(Comparator.comparing(Language::getPopulation).reversed());
 
             // Print the header
             System.out.println("--------------------------------------------------------------------------------");
-            System.out.printf("%-25s %-40s %-30s", "LANGUAGE", "POPULATION", "WORLD POPULATION %");
-            System.out.println();
+            System.out.printf("%-15s %-15s %-15s\n", "Language", "Population", "Percent of World Population");
             System.out.println("--------------------------------------------------------------------------------");
 
-            // Print the languages in the order specified by languageNames array
-            for (String languageName : languageNames) {
-                for (Language language : languages) {
-                    if (language.getName().equals(languageName)) {
-                        String resString = String.format("%-25s %-40s %-30s", language.getName(),
-                                language.getPopulation(), language.getPercentOfWorldPop());
-                        System.out.println(resString);
-                        break;
-                    }
-                }
+            // Print the language statistics
+            for (Language language : languages) {
+                System.out.printf("%-15s %-15.0f %-15.2f%%\n", language.getName(), language.getPopulation(),
+                        language.getPercentOfWorldPop());
             }
-        }
 
-        public void populateLanguageStats() {
+            // Print the footer
+            System.out.println("--------------------------------------------------------------------------------");
+        }
+    }
+
+    public static class Language {
+
+        private final String name;
+        private final double population;
+        private final double percentOfWorldPop;
+
+        /**
+         * Constructor for Language class.
+         *
+         * @param name              The name of the language
+         * @param population        The population of people that speak the language
+         * @param percentOfWorldPop The percentage of the world population that speaks the language
+         */
+        public Language(String name, double population, double percentOfWorldPop) {
+            this.name = name;
+            this.population = population;
+            this.percentOfWorldPop = percentOfWorldPop;
         }
 
         /**
-         * Inner class representing a language.
+         * Getter method for the name of the language.
+         *
+         * @return The name of the language
          */
-        private static class Language {
-            private final String name;
-            private final double population;
-            private final double percentOfWorldPop;
+        public String getName() {
+            return name;
+        }
 
-            /**
-             * Constructor for Language class.
-             *
-             * @param name              The name of the language
-             * @param population        The population of people that speak the language
-             * @param percentOfWorldPop The percentage of the world population that speaks the language
-             */
-            public Language(String name, double population, double percentOfWorldPop) {
-                this.name = name;
-                this.population = population;
-                this.percentOfWorldPop = percentOfWorldPop;
-            }
+        /**
+         * Getter method for the population of people that speak the language.
+         *
+         * @return The population of people that speak the language
+         */
+        public double getPopulation() {
+            return population;
+        }
 
-            /**
-             * Getter method for the name of the language.
-             *
-             * @return The name of the language
-             */
-            public String getName() {
-                return name;
-            }
-
-            /**
-             * Getter method for the population of people that speak the language.
-             *
-             * @return The population of people that speak the language
-             */
-            public double getPopulation() {
-                return population;
-            }
-
-            /**
-             * Getter method for the percentage of the world population that speaks the language.
-             *
-             * @return The percentage of the world population that speaks the language
-             */
-            public double getPercentOfWorldPop() {
-                return percentOfWorldPop;
-            }
+        /**
+         * Getter method for the percentage of the world population that speaks the language.
+         *
+         * @return The percentage of the world population that speaks the language
+         */
+        public double getPercentOfWorldPop() {
+            return percentOfWorldPop;
         }
     }
 }
