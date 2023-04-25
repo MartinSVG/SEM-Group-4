@@ -178,5 +178,13 @@ public class AppIntegrationTest
         population = app.getPopulation("Country","Barbados");
         assertNotNull(population);
     }
+
+    // Population of a district
+    @Test
+    void testGetPopulationOfADistrict(){
+        ArrayList<String> population = new ArrayList<String>();
+        population = app.getPopulation("District","Gujarat");
+        assertNotNull(population);
+    }
 }
 
