@@ -162,5 +162,13 @@ public class AppIntegrationTest
         population = app.getPopulation("Continent","North America");
         assertNotNull(population);
     }
+
+    // Population of a region
+    @Test
+    void testGetPopulationOfARegion(){
+        ArrayList<String> population = new ArrayList<String>();
+        population = app.getPopulation("Region","Caribbean");
+        assertNotNull(population);
+    }
 }
 
