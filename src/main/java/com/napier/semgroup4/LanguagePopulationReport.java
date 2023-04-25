@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class language_population_report {
+public class LanguagePopulationReport {
 
     public static void main(String[] args) {
         LanguageStats languageStats = new LanguageStats();
@@ -35,7 +35,7 @@ public class language_population_report {
 
                 // Create a prepared statement to retrieve data for Chinese, English, Hindi, Spanish, and Arabic
                 PreparedStatement statement = connection.prepareStatement(
-                        "SELECT language_name, population, percent_of_world_pop FROM languages WHERE language_name IN (?, ?, ?, ?, ?)");
+                        "SELECT language_name, population, percent_of_world_population FROM country_language WHERE language_name IN (?, ?, ?, ?, ?)");
                 for (int i = 0; i < languageNames.length; i++) {
                     statement.setString(i + 1, languageNames[i]);
                 }
@@ -47,7 +47,7 @@ public class language_population_report {
                 while (resultSet.next()) {
                     String languageName = resultSet.getString("language_name");
                     double population = resultSet.getDouble("population");
-                    double percentOfWorldPop = resultSet.getDouble("percent_of_world_pop");
+                    double percentOfWorldPop = resultSet.getDouble("percent_of_world_population");
                     languages.add(new Language(languageName, population, percentOfWorldPop));
                 }
             } catch (SQLException e) {
