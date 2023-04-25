@@ -12,7 +12,7 @@ public class App
         // Create new Application
         App a = new App();
 
-        // Connect to database
+        // Connect to the database
         if(args.length < 1){
             a.connect("localhost:33060", 30000);
         }else{
@@ -22,19 +22,19 @@ public class App
             language_population_report.reportLanguagePopulation(args);
     }
 
-        // Prints Reports for Countries feature
+        // Prints Reports for the Countries feature
         Country_Report.main(a);
 
-        // Prints Reports for Cities feature
+        // Prints Reports for the Cities feature
         Cities_Report.main(a);
 
-        // Prints Reports for Capital Cities feature
+        // Prints Reports for the Capital Cities feature
         Capital_Cities_Report.main(a);
 
-        //Prints Reports for Population of the World, a Continent, Region, Country, District, and City
+        //Prints Reports for the Population of the World, a Continent, Region, Country, District, and City
         Individual_Population_Report.main(a);
 
-        //Prints Reports for Population of people living in and out of cities
+        //Prints Reports for the Population of people living in and out of cities
         In_and_Out_of_Cities_Report.main(a);
 
         // Prints Reports for Population of language speakers
