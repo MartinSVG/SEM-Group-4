@@ -201,26 +201,26 @@ public class AppIntegrationTest
 
     @Test
     void testgetInAndOutOfCities() {
-        ArrayList<String> population = new ArrayList<String>();
-        population = app.getPopulation("Continent", "North America");
-        assertNotNull(population);
+        ArrayList<String> result = new ArrayList<String>();
+        result = app.getInAndOutOfCities("Continent", "North America");
+        assertNotNull(result);
     }
 
     //Population of people living in cities in the region of the Caribbean
     @Test
     void testgetInAndOutOfCities() {
-        ArrayList<String> population = new ArrayList<String>();
-        population = app.getPopulation("Region", "Caribbean");
-        assertNotNull(population);
+        ArrayList<String> result = new ArrayList<String>();
+        result = app.getInAndOutOfCities("Region", "Caribbean");
+        assertNotNull(result);
     }
 
     //Population of people living in cities in the country of Barbados
 
     @Test
     void testgetInAndOutOfCities() {
-        ArrayList<String> population = new ArrayList<String>();
-        population = app.getPopulation("Country", "Barbados");
-        assertNotNull(population);
+        ArrayList<String> result = new ArrayList<String>();
+        result = app.getInAndOutOfCities("Country", "Barbados");
+        assertNotNull(result);
     }
 
 
