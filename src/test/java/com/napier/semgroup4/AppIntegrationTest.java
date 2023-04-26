@@ -200,16 +200,16 @@ public class AppIntegrationTest
     //Population of people living in cities in the continent of North America
 
     @Test
-    void testgetInAndOutOfCities() {
-        ArrayList<String> result = new ArrayList<String>();
+    void testgetInAndOutOfCities(){
+        ArrayList<String> result = new ArrayList<~>();
         result = app.getInAndOutOfCities("Continent", "North America");
         assertNotNull(result);
     }
 
     //Population of people living in cities in the region of the Caribbean
     @Test
-    void testgetInAndOutOfCities() {
-        ArrayList<String> result = new ArrayList<String>();
+    void testgetInAndOutOfCities(){
+        ArrayList<String> result = new ArrayList<~>();
         result = app.getInAndOutOfCities("Region", "Caribbean");
         assertNotNull(result);
     }
@@ -217,8 +217,8 @@ public class AppIntegrationTest
     //Population of people living in cities in the country of Barbados
 
     @Test
-    void testgetInAndOutOfCities() {
-        ArrayList<String> result = new ArrayList<String>();
+    void testgetInAndOutOfCities(){
+        ArrayList<String> result = new ArrayList<~>();
         result = app.getInAndOutOfCities("Country", "Barbados");
         assertNotNull(result);
     }
