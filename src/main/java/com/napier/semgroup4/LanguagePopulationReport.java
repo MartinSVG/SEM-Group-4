@@ -35,10 +35,11 @@ public class LanguagePopulationReport {
 
                 // Create a prepared statement to retrieve data for Chinese, English, Hindi, Spanish, and Arabic
                 PreparedStatement statement = connection.prepareStatement(
-                        "SELECT cl.Language, cl.Percentage, ROUND(c.Population * (cl.Percentage/100)) as Population "
+                        "SELECT cl.Language, SUM(cl.Percentage) AS TotalPercentage, SUM(c.Population * (cl.Percentage/100)) as Population "
                                 + "FROM countrylanguage cl "
                                 + "JOIN country c ON c.Code = cl.CountryCode "
-                                + "WHERE cl.Language IN (?, ?, ?, ?, ?)");
+                                + "WHERE cl.Language IN (?, ?, ?, ?, ?)"
+                                + "GROUP BY cl.Language");
                 for (int i = 0; i < languageNames.length; i++) {
                     statement.setString(i + 1, languageNames[i]);
                 }
