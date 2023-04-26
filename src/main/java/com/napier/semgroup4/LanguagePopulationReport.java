@@ -50,7 +50,7 @@ public class LanguagePopulationReport {
                 while (resultSet.next()) {
                     String languageName = resultSet.getString("Language");
                     double population = resultSet.getDouble("Population");
-                    double percentOfWorldPop = resultSet.getDouble("Percentage");
+                    double percentOfWorldPop = population / 6078749450.0 * 100.0;
                     languages.add(new Language(languageName, population, percentOfWorldPop));
                 }
             } catch (SQLException e) {
