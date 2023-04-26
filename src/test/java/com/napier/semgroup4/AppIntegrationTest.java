@@ -194,5 +194,36 @@ public class AppIntegrationTest
         population = app.getPopulation("City","Austin");
         assertNotNull(population);
     }
+
+    /* Integration Test for In and Out of Cities Feature */
+
+    //Population of people living in cities in the continent of North America
+
+    @Test
+    void testgetInAndOutOfCities() {
+        ArrayList<String> population = new ArrayList<String>();
+        population = app.getPopulation("Continent", "North America");
+        assertNotNull(population);
+    }
+
+    //Population of people living in cities in the region of the Caribbean
+    @Test
+    void testgetInAndOutOfCities() {
+        ArrayList<String> population = new ArrayList<String>();
+        population = app.getPopulation("Region", "Caribbean");
+        assertNotNull(population);
+    }
+
+    //Population of people living in cities in the country of Barbados
+
+    @Test
+    void testgetInAndOutOfCities() {
+        ArrayList<String> population = new ArrayList<String>();
+        population = app.getPopulation("Country", "Barbados");
+        assertNotNull(population);
+    }
+
+
 }
+
 
