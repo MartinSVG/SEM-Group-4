@@ -3,46 +3,48 @@ package com.napier.semgroup4;
 import java.sql.*;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.sql.Connection;
 
-public class App
-{
-    public static void main(String[] args)
-    {
+public class App {
+    public static void main(String[] args) {
         // Create new Application
         App a = new App();
 
-        // Connect to database
-        if(args.length < 1){
+        // Connect to the database
+        if (args.length < 1) {
             a.connect("localhost:33060", 30000);
-        }else{
+        } else {
             a.connect(args[0], Integer.parseInt(args[1]));
         }
 
-        // Prints Reports for Countries feature
+        // Populates and Prints Reports for Population of language speakers
+        LanguagePopulationReport.LanguageStats languageStats = new LanguagePopulationReport.LanguageStats();
+        languageStats.populateLanguageStats(a.con);
+        languageStats.printLanguageStats();
+
+        // Prints Reports for the Countries feature
         Country_Report.main(a);
 
-        // Prints Reports for Cities feature
+        // Prints Reports for the Cities feature
         Cities_Report.main(a);
 
-        // Prints Reports for Capital Cities feature
+        // Prints Reports for the Capital Cities feature
         Capital_Cities_Report.main(a);
 
-        //Prints Reports for Population of the World, a Continent, Region, Country, District, and City
+        //Prints Reports for the Population of the World, a Continent, Region, Country, District, and City
         Individual_Population_Report.main(a);
 
-        //Prints Reports for Population of people living in and out of cities
+        //Prints Reports for the Population of people living in and out of cities
         In_and_Out_of_Cities_Report.main(a);
 
         // Disconnect from database
         a.disconnect();
     }
 
-
     /**
      * Connection to MySQL database.
      */
     private Connection con = null;
-
 
     /**
      * Connect to the MySQL database.
@@ -69,7 +71,7 @@ public class App
                 System.out.println("Successfully connected");
                 break;
             } catch (SQLException sqle) {
-                System.out.println("Failed to connect to database attempt " + Integer.toString(i));
+                System.out.println("Failed to connect to database attempt ");
                 System.out.println(sqle.getMessage());
             } catch (InterruptedException ie) {
                 System.out.println("Thread interrupted? Should not happen.");
@@ -151,7 +153,7 @@ public class App
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
 
-            ArrayList<Country> countries = new ArrayList<Country>();
+            ArrayList<Country> countries = new ArrayList<>();
             while (rset.next())
             {
                 Country country = new Country();
