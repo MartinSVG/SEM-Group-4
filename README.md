@@ -22,7 +22,7 @@ https://zube.io/martinsvg/sem-group-4/w/project-workspace/kanban
 | ID    | Name | Met  | Screenshot |
 |-------|------|------|------------|
 | 1     | All the countries in the world organised by largest population to smallest. | Yes | ![All Countries Population](/SEM%20Screenshots/Screenshot%202023-04-25%20at%208.30.27%20PM.png) |
-| 2     | All the countries in a continent organised by largest population to smallest. | Yes | ![Country Population by Continent](/SEM5Screenshots/Screenshot%202023-04-25%20at%208.30.49%20PM.png)  |
+| 2     | All the countries in a continent organised by largest population to smallest. | Yes | ![Country Population by Continent](/SEM%20Screenshots/Screenshot%202023-04-25%20at%208.30.49%20PM.png)  |
 | 3     | All the countries in a region organised by largest population to smallest. | Yes | ![countriesbyregion](SEM Screenshots/Screenshot 2023-04-25 at 8.31.04 PM.png) |
 | 4     | The top N populated countries in the world where N is provided by the user.| Yes | ![topNCountries](SEM Screenshots/Screenshot 2023-04-25 at 8.31.23 PM.png) |
 | 5     | The top N populated countries in a continent where N is provided by the user.| Yes | ![topNcountriesbycontinent](SEM Screenshots/Screenshot 2023-04-25 at 8.31.33 PM.png) |
