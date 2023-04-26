@@ -21,6 +21,6 @@ https://zube.io/martinsvg/sem-group-4/w/project-workspace/kanban
 
 | ID    | Name | Met  | Screenshot |
 |-------|------|------|------------|
-| 1     | All the countries in the world organised by largest population to smallest. | Yes | ![All Countries Population](https://github.com/MartinSVG/SEM-Group-4/blob/2bfdac7dd75cabe36528838c601224d774f3476a/SEM%20Screenshots/Screenshot%202023-04-25%20at%208.30.27%20PM.png?raw=true)
+| 1     | All the countries in the world organised by largest population to smallest. | Yes | ![All Countries Population](SEM Screenshots/Screenshot 2023-04-25 at 8.30.27 PM.png?raw=true)
 
 
