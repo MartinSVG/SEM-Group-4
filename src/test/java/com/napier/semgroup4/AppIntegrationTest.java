@@ -214,7 +214,7 @@ public class AppIntegrationTest
         assertNotNull(result);
     }
 
-    //Population of people living in cities in the country of Barbados
+    //Population of people that are living in cities in the country of Barbados
 
     @Test
     void testGetInAndOutOfCitiesInCountry(){
