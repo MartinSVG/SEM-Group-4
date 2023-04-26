@@ -578,6 +578,8 @@ public class App
         System.out.printf("%-30s %-35s %-20s %-20s", "NAME", "COUNTRY", "DISTRICT", "POPULATION");
         System.out.println();
         System.out.println("---------------------------------------------------------------------------------------------------");
+        NumberFormat nf= NumberFormat.getInstance();
+        nf.setMaximumFractionDigits(0);
         // Loop over all cities in the list
         for (City cit : cities)
         {
@@ -585,7 +587,7 @@ public class App
                 continue;
             String cit_string =
                     String.format("%-30s %-35s %-20s %-20s",
-                            cit.Name, cit.Country, cit.District, cit.Population);
+                            cit.Name, cit.Country, cit.District, nf.format(cit.Population));
             System.out.println(cit_string);
         }
     }
@@ -607,6 +609,8 @@ public class App
         System.out.printf("%-25s %-40s %-30s", "NAME", "COUNTRY", "POPULATION");
         System.out.println();
         System.out.println("--------------------------------------------------------------------------------");
+        NumberFormat nf= NumberFormat.getInstance();
+        nf.setMaximumFractionDigits(0);
         // Loop over all cities in the list
         for (City cty : cities)
         {
@@ -614,7 +618,7 @@ public class App
                 continue;
             String resString =
                     String.format("%-25s %-40s %-30s",
-                            cty.Name,cty.Country,cty.Population);
+                            cty.Name,cty.Country,nf.format(cty.Population));
             System.out.println(resString);
         }
     }
