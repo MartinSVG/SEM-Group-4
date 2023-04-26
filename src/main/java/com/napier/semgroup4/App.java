@@ -547,6 +547,8 @@ public class App
         System.out.printf("%3s %45s %25s %35s %15s %20s", "ID", "NAME", "CONTINENT", "REGION", "POPULATION", "CAPITAL");
         System.out.println();
         System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------");
+        NumberFormat nf= NumberFormat.getInstance();
+        nf.setMaximumFractionDigits(0);
         // Loop over all countries in the list
         for (Country cnt : countries)
         {
@@ -554,7 +556,7 @@ public class App
                 continue;
             String resString =
                     String.format("%3s %45s %25s %35s %15s %20s",
-                            cnt.countryID,cnt.name,cnt.continent,cnt.region,cnt.population,cnt.capital);
+                            cnt.countryID,cnt.name,cnt.continent,cnt.region,nf.format(cnt.population),cnt.capital);
             System.out.println(resString);
         }
     }
