@@ -9,7 +9,7 @@
 ## Group Members:
 1. Esaias Burnette              GMT-4
 2. Alan Rodney Gooding          GMT-4
-3. Mouli Madhuryu Gundu         GMT-9
+3. Mouli Madhuryu Gundu         GMT+1
 4. Elizabeth Sibongile Khosa    GMT-4
 5. Jesher Olivarez              GMT-4
 6. Martin Sheen                 GMT-4
