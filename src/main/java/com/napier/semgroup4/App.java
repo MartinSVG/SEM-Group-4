@@ -17,11 +17,6 @@ public class App {
             a.connect(args[0], Integer.parseInt(args[1]));
         }
 
-        // Populates and Prints Reports for Population of language speakers
-        LanguagePopulationReport.LanguageStats languageStats = new LanguagePopulationReport.LanguageStats();
-        languageStats.populateLanguageStats(a.con);
-        languageStats.printLanguageStats();
-
         // Prints Reports for the Countries feature
         Country_Report.main(a);
 
@@ -36,6 +31,11 @@ public class App {
 
         //Prints Reports for the Population of people living in and out of cities
         In_and_Out_of_Cities_Report.main(a);
+
+        // Populates and Prints Reports for Population of language speakers
+        LanguagePopulationReport.LanguageStats languageStats = new LanguagePopulationReport.LanguageStats();
+        languageStats.populateLanguageStats(a.con);
+        languageStats.printLanguageStats();
 
         // Disconnect from database
         a.disconnect();
@@ -175,6 +175,7 @@ public class App {
         }
     }
 
+
     /**
      *  Gets population of different subgroups of the world
      *  @param type Defines what type of report is to be generated. eg (City or Continent)
@@ -234,29 +235,6 @@ public class App {
             System.out.println("Failed to get population");
             return null;
         }
-    }
-
-    /**
-     * Prints the countries retrieved from the database
-     *  @param result The list of variables to print
-     */
-    public void printPopulation(ArrayList<String> result){
-        if (result == null || result.contains(null) || result.isEmpty())
-        {
-            System.out.println("Failed to get population");
-            return;
-        }
-        // Print header
-        System.out.println("------------------------------------");
-        System.out.printf("%3s", "Population of " + result.get(1) + " " + result.get(0));
-        System.out.println();
-        System.out.println("------------------------------------");
-        NumberFormat nf= NumberFormat.getInstance();
-        nf.setMaximumFractionDigits(0);
-        String popString =
-                String.format("%3s",
-                        nf.format(Double.parseDouble(result.get(2))));
-        System.out.println(popString);
     }
 
 
@@ -411,12 +389,12 @@ public class App {
         }
     }
 
+
     /**
      *  Gets population of people living in and out of cities in a contient, region and country
      *  @param type Defines what type of report is to be generated. eg (City or Continent)
      *  @param name Name of Continent, City, etc.
      */
-
     public ArrayList<String> getInAndOutOfCities(String type, String name)
     {
         try{
@@ -619,6 +597,34 @@ public class App {
         }
     }
 
+
+    /**
+     * Prints the countries retrieved from the database
+     *  @param result The list of variables to print
+     */
+    public void printPopulation(ArrayList<String> result){
+        if (result == null || result.contains(null) || result.isEmpty())
+        {
+            System.out.println("Failed to get population");
+            return;
+        }
+        // Print header
+        System.out.println("------------------------------------");
+        System.out.printf("%3s", "Population of " + result.get(1) + " " + result.get(0));
+        System.out.println();
+        System.out.println("------------------------------------");
+        NumberFormat nf= NumberFormat.getInstance();
+        nf.setMaximumFractionDigits(0);
+        String popString =
+                String.format("%3s",
+                        nf.format(Double.parseDouble(result.get(2))));
+        System.out.println(popString);
+    }
+
+    /**
+     * Prints the city population retrieved from the database
+     *  @param result The list of variables to print
+     */
     public void printInAndOutOfCities(ArrayList<String> result){
         if (result == null || result.contains(null) || result.isEmpty())
         {
