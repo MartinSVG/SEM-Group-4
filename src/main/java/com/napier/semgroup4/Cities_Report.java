@@ -40,7 +40,7 @@ public class Cities_Report {
 
         // Print top 5 cities in a region from the largest population to smallest
         System.out.println("Top 5 cities in a region (Caribbean) - Largest Population to Smallest:");
-        a.printCities(a.getCities("country.Region = 'Caribbean'",-1));
+        a.printCities(a.getCities("country.Region = 'Caribbean'",5));
         System.out.println();
 
         // Print top 5 cities in a country from the largest population to smallest
