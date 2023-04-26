@@ -197,7 +197,7 @@ public class AppIntegrationTest
 
     /* Integration Test for In and Out of Cities Feature */
 
-    //Population of people living in cities in the continent of North America
+    //Population of people that are living in cities in the continent of North America
 
     @Test
     void testGetInAndOutOfCitiesInContinent(){
