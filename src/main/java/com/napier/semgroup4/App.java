@@ -19,7 +19,7 @@ public class App {
             a.connect(args[0], Integer.parseInt(args[1]));
         }
 
-/*
+
         // Prints Reports for the Countries feature
         Country_Report.main(a);
 
@@ -34,7 +34,7 @@ public class App {
 
         //Prints Reports for the Population of people living in and out of cities
         In_and_Out_of_Cities_Report.main(a);
-*/
+
         // Populates and Prints Reports for Population of language speakers
         LanguagePopulationReport.main(a);
 
