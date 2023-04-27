@@ -193,7 +193,7 @@ public class AppIntegrationTest
         assertNotNull(countries);
     }
 
-    // All Countries in a Continent
+    // All Countries in a Continent (South America)
 
     @Test
     void testGetAllCountriesInAContinent()
