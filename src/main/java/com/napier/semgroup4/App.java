@@ -4,6 +4,8 @@ import java.sql.*;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.sql.Connection;
+import java.util.Comparator;
+import java.util.List;
 
 public class App {
     public static void main(String[] args) {
@@ -17,11 +19,7 @@ public class App {
             a.connect(args[0], Integer.parseInt(args[1]));
         }
 
-        // Populates and Prints Reports for Population of language speakers
-        LanguagePopulationReport.LanguageStats languageStats = new LanguagePopulationReport.LanguageStats();
-        languageStats.populateLanguageStats(a.con);
-        languageStats.printLanguageStats();
-
+/*
         // Prints Reports for the Countries feature
         Country_Report.main(a);
 
@@ -36,6 +34,9 @@ public class App {
 
         //Prints Reports for the Population of people living in and out of cities
         In_and_Out_of_Cities_Report.main(a);
+*/
+        // Populates and Prints Reports for Population of language speakers
+        LanguagePopulationReport.main(a);
 
         // Disconnect from database
         a.disconnect();
@@ -44,7 +45,7 @@ public class App {
     /**
      * Connection to MySQL database.
      */
-    private Connection con = null;
+    Connection con = null;
 
     /**
      * Connect to the MySQL database.
@@ -175,6 +176,7 @@ public class App {
         }
     }
 
+
     /**
      *  Gets population of different subgroups of the world
      *  @param type Defines what type of report is to be generated. eg (City or Continent)
@@ -234,29 +236,6 @@ public class App {
             System.out.println("Failed to get population");
             return null;
         }
-    }
-
-    /**
-     * Prints the countries retrieved from the database
-     *  @param result The list of variables to print
-     */
-    public void printPopulation(ArrayList<String> result){
-        if (result == null || result.contains(null) || result.isEmpty())
-        {
-            System.out.println("Failed to get population");
-            return;
-        }
-        // Print header
-        System.out.println("------------------------------------");
-        System.out.printf("%3s", "Population of " + result.get(1) + " " + result.get(0));
-        System.out.println();
-        System.out.println("------------------------------------");
-        NumberFormat nf= NumberFormat.getInstance();
-        nf.setMaximumFractionDigits(0);
-        String popString =
-                String.format("%3s",
-                        nf.format(Double.parseDouble(result.get(2))));
-        System.out.println(popString);
     }
 
 
@@ -411,12 +390,12 @@ public class App {
         }
     }
 
+
     /**
      *  Gets population of people living in and out of cities in a contient, region and country
      *  @param type Defines what type of report is to be generated. eg (City or Continent)
      *  @param name Name of Continent, City, etc.
      */
-
     public ArrayList<String> getInAndOutOfCities(String type, String name)
     {
         try{
@@ -532,7 +511,65 @@ public class App {
         }
     }
 
+    public static class LanguageStats {
+        private final String[] languageNames = {"Chinese", "English", "Hindi", "Spanish", "Arabic"};
+        private final List<Language> languages = new ArrayList<>();
 
+        public void getLanguageStats(Connection connection) {
+            try {
+                // Check if connection is null
+                if (connection == null) {
+                    System.out.println("Error: connection is null.");
+                    return;
+                }
+
+                // Create a prepared statement to retrieve data for Chinese, English, Hindi, Spanish, and Arabic
+                PreparedStatement statement = connection.prepareStatement(
+                        "SELECT cl.Language, SUM(cl.Percentage) AS TotalPercentage, SUM(c.Population * (cl.Percentage/100)) as Population "
+                                + "FROM countrylanguage cl "
+                                + "JOIN country c ON c.Code = cl.CountryCode "
+                                + "WHERE cl.Language IN (?, ?, ?, ?, ?)"
+                                + "GROUP BY cl.Language");
+                for (int i = 0; i < languageNames.length; i++) {
+                    statement.setString(i + 1, languageNames[i]);
+                }
+
+                // Execute the query and retrieve results
+                ResultSet resultSet = statement.executeQuery();
+
+                // Populate the Language objects with the retrieved data
+
+                while (resultSet.next()) {
+                    String languageName = resultSet.getString("Language");
+                    double population = resultSet.getDouble("Population");
+                    double percentOfWorldPop = population / 6078749450.0 * 100.0;
+                    languages.add(new Language(languageName, population, percentOfWorldPop));
+                }
+            } catch (SQLException e) {
+                System.out.println("Error populating language stats from database.");
+                e.printStackTrace();
+            }
+        }
+
+        public void printLanguageStats() {
+            // Sort the languages in descending order of population
+            languages.sort(Comparator.comparing(Language::getPopulation).reversed());
+
+            // Print the header
+            System.out.println("--------------------------------------------------------------------------------");
+            System.out.printf("%-15s %-15s %-15s\n", "Language", "Population", "Percent of World Population");
+            System.out.println("--------------------------------------------------------------------------------");
+
+            // Print the language statistics
+            for (Language language : languages) {
+                System.out.printf("%-15s %-15.0f %-15.2f%%\n", language.getName(), language.getPopulation(),
+                        language.getPercentOfWorldPopulation());
+            }
+
+            // Print the footer
+            System.out.println("--------------------------------------------------------------------------------");
+        }
+    }
     /**
      * Prints the countries retrieved from the database
      *  @param countries The list of countries to print.
@@ -619,6 +656,34 @@ public class App {
         }
     }
 
+
+    /**
+     * Prints the countries retrieved from the database
+     *  @param result The list of variables to print
+     */
+    public void printPopulation(ArrayList<String> result){
+        if (result == null || result.contains(null) || result.isEmpty())
+        {
+            System.out.println("Failed to get population");
+            return;
+        }
+        // Print header
+        System.out.println("------------------------------------");
+        System.out.printf("%3s", "Population of " + result.get(1) + " " + result.get(0));
+        System.out.println();
+        System.out.println("------------------------------------");
+        NumberFormat nf= NumberFormat.getInstance();
+        nf.setMaximumFractionDigits(0);
+        String popString =
+                String.format("%3s",
+                        nf.format(Double.parseDouble(result.get(2))));
+        System.out.println(popString);
+    }
+
+    /**
+     * Prints the city population retrieved from the database
+     *  @param result The list of variables to print
+     */
     public void printInAndOutOfCities(ArrayList<String> result){
         if (result == null || result.contains(null) || result.isEmpty())
         {
@@ -635,5 +700,6 @@ public class App {
         System.out.printf("Rural population: %s (%s)\n", result.get(5), result.get(6));
 
     }
+
 
 }

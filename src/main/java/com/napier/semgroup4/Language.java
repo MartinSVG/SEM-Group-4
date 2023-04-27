@@ -1,8 +1,23 @@
 package com.napier.semgroup4;
 
 public class Language {
+
+    /**
+     * Language name
+     *
+     */
     private String name;
+
+    /**
+     * Population
+     *
+     */
     private double population;
+
+    /**
+     * Population Percentage
+     *
+     */
     private double percentOfWorldPopulation;
 
     public Language(String name, double population, double percentOfWorldPopulation) {
@@ -31,7 +46,4 @@ public class Language {
         return percentOfWorldPopulation;
     }
 
-    public void setPercentOfWorldPopulation(double percentOfWorldPopulation) {
-        this.percentOfWorldPopulation = percentOfWorldPopulation;
-    }
 }
