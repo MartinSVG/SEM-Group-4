@@ -11,40 +11,40 @@ import java.util.List;
 
 public class LanguagePopulationReport {
 
-        public static void main(String[] args) {
-            LanguageStats languageStats = new LanguageStats();
-            // pass in the Connection object
-            languageStats.populateLanguageStats(null);
-            languageStats.printLanguageStats();
-        }
+    public static void main(String[] args) {
+        LanguageStats languageStats = new LanguageStats();
+        // pass in the Connection object
+        languageStats.populateLanguageStats(null);
+        languageStats.printLanguageStats();
+    }
 
-        public static void reportLanguagePopulation(String[] ignoredArgs) {
-        }
+    public static void reportLanguagePopulation(String[] ignoredArgs) {
+    }
 
-        public static class LanguageStats {
+    public static class LanguageStats {
 
-            private final String[] languageNames = {"Chinese", "English", "Hindi", "Spanish", "Arabic"};
-            private final List<Language> languages = new ArrayList<>();
+        private final String[] languageNames = {"Chinese", "English", "Hindi", "Spanish", "Arabic"};
+        private final List<Language> languages = new ArrayList<>();
 
-            public void populateLanguageStats(Connection connection) {
-                try {
-                    // Check if connection is null
-                    if (connection == null) {
-                        System.out.println("Error: connection is null.");
-                        return;
-                    }
+        public void populateLanguageStats(Connection connection) {
+            try {
+                // Check if connection is null
+                if (connection == null) {
+                    System.out.println("Error: connection is null.");
+                    return;
+                }
 
-                    // Create a prepared statement to retrieve data for Chinese, English, Hindi, Spanish, Arabic, and additional variants of English
-                    List<String> languageNames = Arrays.asList("Chinese", "English", "Hindi", "Spanish", "Arabic");
-                    List<String> englishVariants = Arrays.asList("'Creole English'", "'Arabic-French-English'", "'Samoan-English'", "'Malay-English'");
-                    List<String> languagesToRetrieve = new ArrayList<>(languageNames);
-                    languagesToRetrieve.addAll(englishVariants);
+                // Create a prepared statement to retrieve data for Chinese, English, Hindi, Spanish, Arabic, and additional variants of English
+                List<String> languageNames = Arrays.asList("Chinese", "English", "Hindi", "Spanish", "Arabic");
+                List<String> englishVariants = Arrays.asList("'Creole English'", "'Arabic-French-English'", "'Samoan-English'", "'Malay-English'");
+                List<String> languagesToRetrieve = new ArrayList<>(languageNames);
+                languagesToRetrieve.addAll(englishVariants);
 
-                    String query = String.format("SELECT cl.Language, SUM(cl.Percentage) AS TotalPercentage, SUM(c.Population * (cl.Percentage/100)) as Population " +
-                            "FROM countrylanguage cl " +
-                            "JOIN country c ON c.Code = cl.CountryCode " +
-                            "WHERE cl.Language IN (%s) " +
-                            "GROUP BY cl.Language", String.join(",", languagesToRetrieve));
+                String query = String.format("SELECT cl.Language, SUM(cl.Percentage) AS TotalPercentage, SUM(c.Population * (cl.Percentage/100)) as Population " +
+                        "FROM countrylanguage cl " +
+                        "JOIN country c ON c.Code = cl.CountryCode " +
+                        "WHERE cl.Language IN (%s) " +
+                        "GROUP BY cl.Language", String.join(",", languagesToRetrieve));
                 PreparedStatement statement = connection.prepareStatement(query);
 
                 // Execute the query and retrieve results
