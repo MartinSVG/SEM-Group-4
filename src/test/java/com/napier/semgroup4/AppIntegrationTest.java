@@ -203,7 +203,7 @@ public class AppIntegrationTest
         assertNotNull(countries);
     }
 
-    // All Countries in a Region
+    // All Countries in a Region (Eastern Asia)
 
     @Test
     void testGetAllCountriesInARegion()
