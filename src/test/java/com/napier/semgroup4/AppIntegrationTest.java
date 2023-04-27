@@ -154,6 +154,7 @@ public class AppIntegrationTest
     /* Integration Tests for Countries Feature */
 
     // Top 5 Populated Countries in the World
+
     @Test
     void testTopFivePopulatedCountriesInTheWorld()
     {
@@ -162,6 +163,55 @@ public class AppIntegrationTest
         assertEquals(5, countries.size());
     }
 
+    // Top 5 Populated Countries in a Continent
+
+    @Test
+    void testTopFivePopulatedCountriesInAContinent()
+    {
+        ArrayList<Country> countries = new ArrayList<Country>();
+        countries = app.getCountries("country.Continent = 'South America'",5);
+        assertEquals(5, countries.size());
+    }
+
+    // Top 5 Populated Countries in a Region
+
+    @Test
+    void testTopFivePopulatedCountriesInARegion()
+    {
+        ArrayList<Country> countries = new ArrayList<Country>();
+        countries = app.getCountries("country.Region = 'Eastern Asia'",5);
+        assertEquals(5, countries.size());
+    }
+
+    // All Countries in the World
+
+    @Test
+    void testGetAllCountriesInTheWorld()
+    {
+        ArrayList<Country> countries = new ArrayList<Country>();
+        countries = app.getCountries("",-1);
+        assertNotNull(countries);
+    }
+
+    // All Countries in a Continent
+
+    @Test
+    void testGetAllCountriesInAContinent()
+    {
+        ArrayList<Country> countries = new ArrayList<Country>();
+        countries = app.getCountries("country.Continent = 'South America'",-1);
+        assertNotNull(countries);
+    }
+
+    // All Countries in a Region
+
+    @Test
+    void testGetAllCountriesInARegion()
+    {
+        ArrayList<Country> countries = new ArrayList<Country>();
+        countries = app.getCountries("country.Region = 'Eastern Asia'",-1);
+        assertNotNull(countries);
+    }
 
     /* Integration Tests for Specific Population Features */
 
