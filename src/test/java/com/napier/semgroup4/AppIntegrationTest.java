@@ -163,7 +163,7 @@ public class AppIntegrationTest
         assertEquals(5, countries.size());
     }
 
-    // Top 5 Populated Countries in a Continent
+    // Top 5 Populated Countries in a Continent (South America)
 
     @Test
     void testTopFivePopulatedCountriesInAContinent()
