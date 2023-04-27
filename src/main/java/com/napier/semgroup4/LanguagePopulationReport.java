@@ -35,15 +35,16 @@ public class LanguagePopulationReport {
                     }
 
                     // Create a prepared statement to retrieve data for Chinese, English, Hindi, Spanish, Arabic, and additional variants of English
-                List<String> englishVariants = Arrays.asList("Creole English", "Arabic-French-English", "Samoan-English", "Malay-English");
-                List<String> languagesToRetrieve = new ArrayList<>(Arrays.asList(languageNames));
-                languagesToRetrieve.addAll(englishVariants);
-                String query = String.format("SELECT cl.Language, SUM(cl.Percentage) AS TotalPercentage, SUM(c.Population * (cl.Percentage/100)) as Population "
-                        + "FROM countrylanguage cl "
-                        + "JOIN country c ON c.Code = cl.CountryCode "
-                        + "WHERE cl.Language IN (%s) "
-                        + "GROUP BY cl.Language", String.join(",", languagesToRetrieve));
+                    List<String> languageNames = Arrays.asList("Chinese", "English", "Hindi", "Spanish", "Arabic");
+                    List<String> englishVariants = Arrays.asList("'Creole English'", "'Arabic-French-English'", "'Samoan-English'", "'Malay-English'");
+                    List<String> languagesToRetrieve = new ArrayList<>(languageNames);
+                    languagesToRetrieve.addAll(englishVariants);
 
+                    String query = String.format("SELECT cl.Language, SUM(cl.Percentage) AS TotalPercentage, SUM(c.Population * (cl.Percentage/100)) as Population " +
+                            "FROM countrylanguage cl " +
+                            "JOIN country c ON c.Code = cl.CountryCode " +
+                            "WHERE cl.Language IN (%s) " +
+                            "GROUP BY cl.Language", String.join(",", languagesToRetrieve));
                 PreparedStatement statement = connection.prepareStatement(query);
 
                 // Execute the query and retrieve results
