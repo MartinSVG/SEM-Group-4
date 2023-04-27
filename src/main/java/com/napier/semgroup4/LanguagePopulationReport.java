@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -33,15 +34,22 @@ public class LanguagePopulationReport {
                     return;
                 }
 
-                // Create a prepared statement to retrieve data for Chinese, English, Hindi, Spanish, and Arabic
-                PreparedStatement statement = connection.prepareStatement(
-                        "SELECT cl.Language, SUM(cl.Percentage) AS TotalPercentage, SUM(c.Population * (cl.Percentage/100)) as Population "
-                                + "FROM countrylanguage cl "
-                                + "JOIN country c ON c.Code = cl.CountryCode "
-                                + "WHERE cl.Language IN (?, ?, ?, ?, ?)"
-                                + "GROUP BY cl.Language");
-                for (int i = 0; i < languageNames.length; i++) {
-                    statement.setString(i + 1, languageNames[i]);
+                // Create a prepared statement to retrieve data for Chinese, English, Hindi, Spanish, Arabic, and additional variants of English
+                List<String> englishVariants = Arrays.asList("Creole English", "Arabic-French-English", "Samoan-English", "Malay-English");
+                List<String> languagesToRetrieve = new ArrayList<>(Arrays.asList(languageNames));
+                languagesToRetrieve.addAll(englishVariants);
+                String query = String.format("SELECT cl.Language, SUM(cl.Percentage) AS TotalPercentage, SUM(c.Population * (cl.Percentage/100)) as Population "
+                        + "FROM countrylanguage cl "
+                        + "JOIN country c ON c.Code = cl.CountryCode "
+                        + "WHERE cl.Language IN (%s) "
+                        + "GROUP BY cl.Language", String.join(",", languagesToRetrieve));
+
+                PreparedStatement statement = connection.prepareStatement(query);
+
+                // Set the parameters for the prepared statement
+                int index = 1;
+                for (String language : languagesToRetrieve) {
+                    statement.setString(index++, language);
                 }
 
                 // Execute the query and retrieve results
@@ -61,8 +69,16 @@ public class LanguagePopulationReport {
         }
 
         public void printLanguageStats() {
+            // Filter out languages that are not in the specified languageNames
+            List<Language> filteredLanguages = new ArrayList<>();
+            for (Language language : languages) {
+                if (Arrays.asList(languageNames).contains(language.getName())) {
+                    filteredLanguages.add(language);
+                }
+            }
+
             // Sort the languages in descending order of population
-            languages.sort(Comparator.comparing(Language::getPopulation).reversed());
+            filteredLanguages.sort(Comparator.comparing(Language::getPopulation).reversed());
 
             // Print the header
             System.out.println("--------------------------------------------------------------------------------");
@@ -70,7 +86,7 @@ public class LanguagePopulationReport {
             System.out.println("--------------------------------------------------------------------------------");
 
             // Print the language statistics
-            for (Language language : languages) {
+            for (Language language : filteredLanguages) {
                 System.out.printf("%-15s %-15.0f %-15.2f%%\n", language.getName(), language.getPopulation(),
                         language.getPercentOfWorldPopulation());
             }
