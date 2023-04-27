@@ -34,17 +34,19 @@ public class LanguagePopulationReport {
                     return;
                 }
 
-                // Create a prepared statement to retrieve data for Chinese, English, Hindi, Spanish, Arabic, and additional variants of English
-                List<String> languageNames = Arrays.asList("Chinese", "English", "Hindi", "Spanish", "Arabic");
-                List<String> englishVariants = Arrays.asList("'Creole English'", "'Arabic-French-English'", "'Samoan-English'", "'Malay-English'");
-                List<String> languagesToRetrieve = new ArrayList<>(languageNames);
-                languagesToRetrieve.addAll(englishVariants);
+                // Create a prepared statement to retrieve data for Chinese, English, Hindi, Spanish, Arabic, and their variants
+                List<String> chineseVariants = Arrays.asList("'Chinese'", "'Canton Chinese'", "'Mandarin Chinese'");
+                List<String> englishVariants = Arrays.asList("'English'", "'Creole English'", "'Malay-English'", "'Arabic-French-English'", "'Samoan-English'");
+                List<String> hindiVariants = List.of("'Hindi'");
+                List<String> arabicVariants = Arrays.asList("'Arabic'", "'Comorian-Arabic'", "'Arabic-French'", "'Arabic-French-English'");
+                List<String> spanishVariants = List.of("'Spanish'");
 
                 String query = String.format("SELECT cl.Language, SUM(cl.Percentage) AS TotalPercentage, SUM(c.Population * (cl.Percentage/100)) as Population " +
-                        "FROM countrylanguage cl " +
-                        "JOIN country c ON c.Code = cl.CountryCode " +
-                        "WHERE cl.Language IN (%s) " +
-                        "GROUP BY cl.Language", String.join(",", languagesToRetrieve));
+                                "FROM countrylanguage cl " +
+                                "JOIN country c ON c.Code = cl.CountryCode " +
+                                "WHERE cl.Language IN (%s, %s, %s, %s, %s) " +
+                                "GROUP BY cl.Language", String.join(",", chineseVariants), String.join(",", englishVariants),
+                        String.join(",", hindiVariants), String.join(",", arabicVariants), String.join(",", spanishVariants));
                 PreparedStatement statement = connection.prepareStatement(query);
 
                 // Execute the query and retrieve results
@@ -75,7 +77,7 @@ public class LanguagePopulationReport {
             // Sort the languages in descending order of population
             filteredLanguages.sort(Comparator.comparing(Language::getPopulation).reversed());
 
-            // Print the header
+// Print the header
             System.out.println("--------------------------------------------------------------------------------");
             System.out.printf("%-15s %-15s %-15s\n", "Language", "Population", "Percent of World Population");
             System.out.println("--------------------------------------------------------------------------------");
