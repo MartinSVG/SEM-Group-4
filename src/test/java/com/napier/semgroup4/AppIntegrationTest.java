@@ -194,5 +194,44 @@ public class AppIntegrationTest
         population = app.getPopulation("City","Austin");
         assertNotNull(population);
     }
+
+    /* Integration Test for In and Out of Cities Feature */
+
+    //Population of people that are living in cities in the continent of North America
+
+    @Test
+    void testGetInAndOutOfCitiesInContinent(){
+        ArrayList<String> result = new ArrayList<String>();
+        result = app.getInAndOutOfCities("Continent", "North America");
+        assertNotNull(result);
+    }
+
+    //Population of people that are living in cities in the region of the Caribbean
+    @Test
+    void testgGetInAndOutOfCitiesInRegion(){
+        ArrayList<String> result = new ArrayList<String>();
+        result = app.getInAndOutOfCities("Region", "Caribbean");
+        assertNotNull(result);
+    }
+
+    //Population of people that are living in cities in the country of Barbados
+
+    @Test
+    void testGetInAndOutOfCitiesInCountry(){
+        ArrayList<String> result = new ArrayList<String>();
+        result = app.getInAndOutOfCities("Country", "Barbados");
+        assertNotNull(result);
+    }
+
+    //Population of people speaking Chinese, English, Hindi, Spanish and Arabic.
+    @Test
+    void testGetLanguageStats(){
+        App.LanguageStats results = new App.LanguageStats();
+        results.getLanguageStats(app.con);
+        assertNotNull(results);
+    }
+
+
 }
+
 
