@@ -173,7 +173,7 @@ public class AppIntegrationTest
         assertEquals(5, countries.size());
     }
 
-    // Top 5 Populated Countries in a Region
+    // Top 5 Populated Countries in a Region (Eastern Asia)
 
     @Test
     void testTopFivePopulatedCountriesInARegion()
