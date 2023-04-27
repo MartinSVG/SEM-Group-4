@@ -124,6 +124,33 @@ public class AppIntegrationTest
         assertNotNull(cities);
     }
 
+    // Top 5 Capital Cities in the World
+    @Test
+    void testTopFivePopulatedCapitalCitiesInTheWorld()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        cities = app.getCapitalCities("",5);
+        assertEquals(5, cities.size());
+    }
+
+    // Top 5 Capital Cities in a Continent
+    @Test
+    void testTopFivePopulatedCapitalCitiesInAContinent()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        cities = app.getCapitalCities("country.Continent = 'South America'",5);
+        assertEquals(5, cities.size());
+    }
+
+    // Top 5 Capital Cities in a Region
+    @Test
+    void testTopFivePopulatedCapitalCitiesInARegion()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        cities = app.getCapitalCities("country.Region = 'Eastern Asia'",5);
+        assertEquals(5, cities.size());
+    }
+
     /* Integration Tests for Countries Feature */
 
     // Top 5 Populated Countries in the World
@@ -133,15 +160,6 @@ public class AppIntegrationTest
         ArrayList<Country> countries = new ArrayList<Country>();
         countries = app.getCountries("",5);
         assertEquals(5, countries.size());
-    }
-
-    // Top 5 Populated Cities in the World
-    @Test
-    void testTopFivePopulatedCapitalCitiesInTheWorld()
-    {
-        ArrayList<City> cities = new ArrayList<City>();
-        cities = app.getCapitalCities("",5);
-        assertEquals(5, cities.size());
     }
 
 
