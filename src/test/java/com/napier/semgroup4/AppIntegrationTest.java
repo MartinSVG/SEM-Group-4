@@ -223,6 +223,14 @@ public class AppIntegrationTest
         assertNotNull(result);
     }
 
+    //Population of people speaking Chinese, English, Hindi, Spanish and Arabic.
+    @Test
+    void testGetLanguageStats(){
+        App.LanguageStats results = new App.LanguageStats();
+        results.getLanguageStats(app.con);
+        assertNotNull(results);
+    }
+
 
 }
 

@@ -512,10 +512,10 @@ public class App {
     }
 
     public static class LanguageStats {
-        private final String[] languageNames = {"Chinese", "English", "Hindi", "Spanish", "Arabic"};
-        private final List<Language> languages = new ArrayList<>();
+        private static final String[] languageNames = {"Chinese", "English", "Hindi", "Spanish", "Arabic"};
+        private static final List<Language> languages = new ArrayList<>();
 
-        public void getLanguageStats(Connection connection) {
+        public static void getLanguageStats(Connection connection) {
             try {
                 // Check if connection is null
                 if (connection == null) {
@@ -552,6 +552,13 @@ public class App {
         }
 
         public void printLanguageStats() {
+
+            if (languages == null)
+            {
+                System.out.println("No Language Stats");
+                return;
+            }
+
             // Sort the languages in descending order of population
             languages.sort(Comparator.comparing(Language::getPopulation).reversed());
 
