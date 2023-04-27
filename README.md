@@ -52,5 +52,5 @@ https://zube.io/martinsvg/sem-group-4/w/project-workspace/kanban
 | 29    | The population of a country. | Yes | ![countrypopulation](/SEM%20Screenshots/Screenshot%202023-04-25%20at%208.43.54%20PM.png)
 | 30    | The population of a district. | Yes | ![districtpopulation](/SEM%20Screenshots/Screenshot%202023-04-25%20at%208.44.02%20PM.png)
 | 31    | The population of a city. | Yes | ![citypopulation](/SEM%20Screenshots/Screenshot%202023-04-25%20at%208.44.10%20PM.png)
-| 32    | The number of people who speak the following the following languages from greatest number to smallest, including the percentage of the world population: Chinese, English, Hindi, Spanish, Arabic. | Yes | ![languages]()
+| 32    | The number of people who speak the following the following languages from greatest number to smallest, including the percentage of the world population: Chinese, English, Hindi, Spanish, Arabic. | Yes | ![languages](/SEM%20Screenshots/Screenshot%202023-04-27%20at%2010.05.22%20AM.png)
 
