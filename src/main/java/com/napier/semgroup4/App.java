@@ -566,10 +566,11 @@ public class App {
             System.out.println("--------------------------------------------------------------------------------");
             System.out.printf("%-15s %-15s %-15s\n", "Language", "Population", "Percent of World Population");
             System.out.println("--------------------------------------------------------------------------------");
-
+            NumberFormat nf= NumberFormat.getInstance();
+            nf.setMaximumFractionDigits(0);
             // Print the language statistics
             for (Language language : languages) {
-                System.out.printf("%-15s %-15.0f %-15.2f%%\n", language.getName(), language.getPopulation(),
+                System.out.printf("%-15s %-15s %-15.2f%%\n", language.getName(), nf.format(language.getPopulation()),
                         language.getPercentOfWorldPopulation());
             }
 
