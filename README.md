@@ -43,9 +43,9 @@ https://zube.io/martinsvg/sem-group-4/w/project-workspace/kanban
 | 20    | The top N populated capital cities in the world where N is provided by the user. | Yes | ![topncapitalcities](/SEM%20Screenshots/Screenshot%202023-04-25%20at%208.42.50%20PM.png)|
 | 21    | The top N populated capital cities in a continent where N is provided by the user. | Yes | ![topncapitalbycontinent](/SEM%20Screenshots/Screenshot%202023-04-25%20at%208.42.59%20PM.png)|
 | 22    | The top N populated capital cities in a region where N is provided by the user. | Yes | ![topncapitalbyregion](/SEM%20Screenshots/Screenshot%202023-04-25%20at%208.43.08%20PM.png) |
-| 23    | The population of people, people living in cities, and people not living in cities in each continent. | Yes| ![citydwellersbycontinent]() |
-| 24    | The population of people, people living in cities, and people not living in cities in each region. | Yes | ![citydwellersregion]() |
-| 25    | The population of people, people living in cities, and people not living in cities in each country. | Yes | ![citydwellerscountry]() |
+| 23    | The population of people, people living in cities, and people not living in cities in each continent. | Yes| ![citydwellersbycontinent](/SEM%20Screenshots/Screenshot%202023-04-27%20at%2010.32.51%20AM.png) |
+| 24    | The population of people, people living in cities, and people not living in cities in each region. | Yes | ![citydwellersregion](/SEM%20Screenshots/Screenshot%202023-04-27%20at%2010.33.02%20AM.png) |
+| 25    | The population of people, people living in cities, and people not living in cities in each country. | Yes | ![citydwellerscountry](/SEM%20Screenshots/Screenshot%202023-04-27%20at%2010.33.13%20AM.png) |
 | 26    | The population of the world. | Yes | ![worldpopulation](/SEM%20Screenshots/Screenshot%202023-04-25%20at%208.43.28%20PM.png)
 | 27    | The population of a continent. | Yes | ![continentpopulation](/SEM%20Screenshots/Screenshot%202023-04-25%20at%208.43.36%20PM.png)
 | 28    | The population of a region. | Yes | ![regionpopulation](/SEM%20Screenshots/Screenshot%202023-04-25%20at%208.43.44%20PM.png)
