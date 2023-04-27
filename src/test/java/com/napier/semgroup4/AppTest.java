@@ -14,6 +14,7 @@ public class AppTest {
         app = new App();
     }
 
+//    Unit Tests for Countries feature
     @Test
     void printCountriesTestNull()
     {
@@ -50,6 +51,7 @@ public class AppTest {
         app.printCountries(countries);
     }
 
+//    Unit Tests for Cities feature
     @Test
     void printCitiesTestNull()
     {
@@ -87,6 +89,7 @@ public class AppTest {
         app.printCities(cities);
     }
 
+//    Unit Tests for Capital Cities feature
     @Test
     void printCapitalCitiesTestNull()
     {
@@ -125,7 +128,6 @@ public class AppTest {
     }
 
     // Unit Tests for In and Out of Cities Feature
-
     @Test
     void printInAndOutOfCitiesTestNull()
     {
