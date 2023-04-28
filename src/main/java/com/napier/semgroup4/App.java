@@ -518,7 +518,7 @@ public class App {
         public static void getLanguageStats(Connection connection) {
             try {
                 // Check if connection is null
-                if (connection == null) {
+                if (connection == null || connection.equals(null)) {
                     System.out.println("Error: connection is null.");
                     return;
                 }
@@ -551,13 +551,7 @@ public class App {
             }
         }
 
-        public void printLanguageStats() {
-
-            if (languages == null)
-            {
-                System.out.println("No Language Stats");
-                return;
-            }
+        public static void printLanguageStats() {
 
             // Sort the languages in descending order of population
             languages.sort(Comparator.comparing(Language::getPopulation).reversed());

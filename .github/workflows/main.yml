@@ -72,4 +72,3 @@ jobs:
           files: |
             ./target/*.jar
 
-#Bug Reporting Setup

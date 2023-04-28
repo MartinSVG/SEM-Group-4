@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 public class AppTest {
     static App app;
 
@@ -192,4 +194,38 @@ public class AppTest {
         result.add("482993000");
         app.printPopulation(result);
     }
+
+    //Unit tests for Language Population feature
+
+    @Test
+    void printLanguageStatsTestNull()
+    {
+        App.LanguageStats.printLanguageStats();
+    }
+    @Test
+    void printLanguageStatsTestEmpty()
+    {
+
+        App.LanguageStats results = new App.LanguageStats();
+        results.getLanguageStats(app.con);
+    }
+    @Test
+    void printLanguageStatsTestContainsNull()
+    {
+
+        app.connect("localhost:33060", 30000);
+        App.LanguageStats results = new App.LanguageStats();
+        results.getLanguageStats(null);
+    }
+
+    @Test
+    void printLanguageStatsWithoutError()
+    {
+        app.connect("localhost:33060", 30000);
+
+        App.LanguageStats languageStats = new App.LanguageStats();
+        languageStats.getLanguageStats(app.con);
+        languageStats.printLanguageStats();
+    }
+
 }
