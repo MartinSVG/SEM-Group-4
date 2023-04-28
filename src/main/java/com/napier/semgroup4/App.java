@@ -512,7 +512,11 @@ public class App {
     }
 
     public static class LanguageStats {
+
+        // An array of the names of the languages we are interested in.
         private static final String[] languageNames = {"Chinese", "English", "Hindi", "Spanish", "Arabic"};
+
+        // A list to store Language objects representing the language statistics
         private static final List<Language> languages = new ArrayList<>();
 
         public static void getLanguageStats(Connection connection) {
