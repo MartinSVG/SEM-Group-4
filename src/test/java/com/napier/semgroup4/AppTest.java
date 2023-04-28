@@ -213,7 +213,6 @@ public class AppTest {
     void printLanguageStatsTestContainsNull()
     {
 
-        app.connect("localhost:33060", 0);
         App.LanguageStats results = new App.LanguageStats();
         results.getLanguageStats(null);
     }
@@ -221,7 +220,6 @@ public class AppTest {
     @Test
     void printLanguageStatsWithoutError()
     {
-        app.connect("localhost:33060", 0);
 
         App.LanguageStats languageStats = new App.LanguageStats();
         languageStats.getLanguageStats(app.con);
